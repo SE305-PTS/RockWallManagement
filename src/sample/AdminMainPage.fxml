@@ -28,7 +28,7 @@
                <children>
                   <ImageView fitHeight="300.0" fitWidth="264.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@SDSULogoEdited.png" />
+                        <Image url="@SDSULogo.png" />
                      </image>
                      <VBox.margin>
                         <Insets left="95.0" />
