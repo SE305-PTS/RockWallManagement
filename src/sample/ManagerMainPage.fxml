@@ -49,8 +49,8 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button mnemonicParsing="false" text="Check-in" />
-                        <Button mnemonicParsing="false" text="Check-out" />
+                        <Button mnemonicParsing="false" text="Sign Waiver" />
+                        <Button mnemonicParsing="false" text="Check In/Out" />
                         <Button mnemonicParsing="false" text="Edit Patron Account" />
                      </children>
                      <padding>
@@ -59,7 +59,7 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
-                        <Button mnemonicParsing="false" text="View/Edit Records" />
+                        <Button mnemonicParsing="false" text="View/Edit Inventory" />
                         <Button mnemonicParsing="false" text="Generate Report" />
                      </children>
                      <padding>
