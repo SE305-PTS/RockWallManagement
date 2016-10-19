@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="783.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Rock Wall Management">
+            <items>
+                  <MenuItem mnemonicParsing="false" text="Admin Login" />
+              <MenuItem mnemonicParsing="false" text="Manager Login" />
+                  <MenuItem mnemonicParsing="false" text="Exit Program" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="300.0" fitWidth="264.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@SDSULogoEdited.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="95.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="South Dakota State University Rock Wall Management">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+               <BorderPane.margin>
+                  <Insets left="140.0" top="20.0" />
+               </BorderPane.margin>
+            </VBox>
+         </center>
+         <bottom>
+            <VBox>
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" text="Check-in" />
+                        <Button mnemonicParsing="false" text="Check-out" />
+                        <Button mnemonicParsing="false" text="Edit Patron Account" />
+                     </children>
+                     <padding>
+                        <Insets left="200.0" top="30.0" />
+                     </padding>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="View Records" />
+                        <Button mnemonicParsing="false" text="Generate Report" />
+                     </children>
+                     <padding>
+                        <Insets left="250.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+         </bottom>
+         <top>
+            <Text fill="#0018ff" strokeType="OUTSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER_RIGHT">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets right="5.0" top="10.0" />
+               </BorderPane.margin>
+            </Text>
+         </top>
+      </BorderPane>
+   </center>
+</BorderPane>
