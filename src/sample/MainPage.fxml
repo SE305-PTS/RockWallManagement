@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
@@ -50,9 +51,9 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button mnemonicParsing="false" text="Check-in" />
-                        <Button mnemonicParsing="false" text="Check-out" />
-                        <Button mnemonicParsing="false" text="Edit Patron Account" />
+                        <Button mnemonicParsing="false" text="Sign Waiver" />
+                        <Button mnemonicParsing="false" text="Check In/Out" />
+                        <Button mnemonicParsing="false" text="View Patron Account" />
                      </children>
                      <padding>
                         <Insets left="200.0" top="30.0" />
@@ -60,7 +61,10 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
-                        <Button mnemonicParsing="false" text="View Records" />
+                        <Button mnemonicParsing="false" text="View Inventory">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor></Button>
                         <Button mnemonicParsing="false" text="Generate Report" />
                      </children>
                      <padding>
