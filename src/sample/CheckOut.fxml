@@ -31,8 +31,6 @@
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <VBox.margin>
                         <Insets left="10.0" top="10.0" />
@@ -40,25 +38,10 @@
                      <children>
                         <HBox prefHeight="30.0" prefWidth="268.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" textAlignment="RIGHT" />
-                              <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID Number" textAlignment="RIGHT" />
                            </children>
                         </HBox>
                         <TextField GridPane.columnIndex="1" />
-                        <HBox GridPane.rowIndex="1">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" textAlignment="RIGHT" />
-                              <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
-                           </children>
-                        </HBox>
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <HBox prefHeight="30.0" prefWidth="268.0" GridPane.rowIndex="2">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID Number" textAlignment="RIGHT" />
-                              <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
-                           </children>
-                        </HBox>
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                   <Button mnemonicParsing="false" text="Submit">
@@ -73,7 +56,7 @@
             </VBox>
          </center>
          <top>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rock Wall Check-Out" BorderPane.alignment="CENTER">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rock Wall Check In/Out" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets top="10.0" />
                </BorderPane.margin>

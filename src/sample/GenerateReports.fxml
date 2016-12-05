@@ -35,31 +35,34 @@
                   <Font size="24.0" />
                </font>
             </Text>
-            <HBox layoutX="20.0" layoutY="177.0" prefHeight="52.0" prefWidth="738.0">
+            <HBox layoutX="20.0" layoutY="177.0" prefHeight="52.0" prefWidth="738.0" spacing="30.0">
                <children>
                   <RadioButton mnemonicParsing="false" text="Check Ins">
                      <HBox.margin>
-                        <Insets right="30.0" />
+                        <Insets />
+                     </HBox.margin>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="ReportType" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton layoutX="10.0" layoutY="20.0" mnemonicParsing="false" text="Certifications" toggleGroup="$ReportType">
+                     <HBox.margin>
+                        <Insets />
                      </HBox.margin>
                   </RadioButton>
-                  <RadioButton layoutX="10.0" layoutY="20.0" mnemonicParsing="false" text="Certifications">
+                  <RadioButton layoutX="10.0" layoutY="20.0" mnemonicParsing="false" text="Suspensions" toggleGroup="$ReportType">
                      <HBox.margin>
-                        <Insets right="30.0" />
+                        <Insets />
                      </HBox.margin>
                   </RadioButton>
-                  <RadioButton layoutX="10.0" layoutY="20.0" mnemonicParsing="false" text="Suspensions">
+                  <RadioButton layoutX="701.0" layoutY="20.0" mnemonicParsing="false" text="Incidents" toggleGroup="$ReportType">
                      <HBox.margin>
-                        <Insets right="30.0" />
+                        <Insets />
                      </HBox.margin>
                   </RadioButton>
-                  <RadioButton layoutX="701.0" layoutY="20.0" mnemonicParsing="false" text="Incidents">
+                  <RadioButton layoutX="618.0" layoutY="20.0" mnemonicParsing="false" text="Injuries" toggleGroup="$ReportType">
                      <HBox.margin>
-                        <Insets right="30.0" />
-                     </HBox.margin>
-                  </RadioButton>
-                  <RadioButton layoutX="618.0" layoutY="20.0" mnemonicParsing="false" text="Injuries">
-                     <HBox.margin>
-                        <Insets right="30.0" />
+                        <Insets />
                      </HBox.margin>
                   </RadioButton>
                </children>
@@ -72,122 +75,110 @@
                   <Font size="24.0" />
                </font>
             </Text>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date">
                            <VBox.margin>
-                              <Insets bottom="10.0" />
+                              <Insets />
                            </VBox.margin>
                         </Text>
                         <TextField />
                      </children>
                      <HBox.margin>
-                        <Insets right="10.0" />
+                        <Insets />
                      </HBox.margin>
                   </VBox>
-                  <VBox layoutX="130.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0">
+                  <VBox layoutX="130.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End Date">
                            <VBox.margin>
-                              <Insets bottom="10.0" />
+                              <Insets />
                            </VBox.margin>
                         </Text>
                         <TextField />
                      </children>
                      <HBox.margin>
-                        <Insets right="10.0" />
+                        <Insets />
                      </HBox.margin>
                   </VBox>
-                  <VBox layoutX="230.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0">
+                  <VBox layoutX="230.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
                            <VBox.margin>
-                              <Insets bottom="10.0" />
+                              <Insets />
                            </VBox.margin>
                         </Text>
                         <TextField />
                      </children>
                      <HBox.margin>
-                        <Insets right="10.0" />
+                        <Insets />
                      </HBox.margin>
                   </VBox>
-                  <VBox layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0">
+                  <VBox layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID">
                            <VBox.margin>
-                              <Insets bottom="10.0" />
+                              <Insets />
                            </VBox.margin>
                         </Text>
                         <TextField />
                      </children>
                      <HBox.margin>
-                        <Insets right="10.0" />
+                        <Insets />
                      </HBox.margin>
                   </VBox>
-                  <VBox layoutX="130.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0">
+                  <VBox layoutX="130.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Belay Certified">
                            <VBox.margin>
-                              <Insets bottom="10.0" />
+                              <Insets />
                            </VBox.margin>
                         </Text>
-                        <CheckBox mnemonicParsing="false" text="Yes">
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </CheckBox>
-                        <CheckBox layoutX="10.0" layoutY="36.0" mnemonicParsing="false" text="No" />
+                        <RadioButton mnemonicParsing="false" text="Yes" />
+                        <RadioButton mnemonicParsing="false" text="No" />
                      </children>
                      <HBox.margin>
-                        <Insets right="10.0" />
+                        <Insets />
                      </HBox.margin>
                   </VBox>
-                  <VBox layoutX="350.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0">
+                  <VBox layoutX="350.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lead Certified">
                            <VBox.margin>
-                              <Insets bottom="10.0" />
+                              <Insets />
                            </VBox.margin>
                         </Text>
-                        <CheckBox mnemonicParsing="false" text="Yes">
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </CheckBox>
-                        <CheckBox layoutX="10.0" layoutY="36.0" mnemonicParsing="false" text="No" />
+                        <RadioButton mnemonicParsing="false" text="Yes" />
+                        <RadioButton mnemonicParsing="false" text="No" />
                      </children>
                   </VBox>
-                  <VBox layoutX="350.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0">
+                  <VBox layoutX="350.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Suspended">
                            <VBox.margin>
-                              <Insets bottom="10.0" />
+                              <Insets />
                            </VBox.margin>
                         </Text>
-                        <CheckBox mnemonicParsing="false" text="Yes">
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </CheckBox>
-                        <CheckBox layoutX="10.0" layoutY="36.0" mnemonicParsing="false" text="No" />
+                        <RadioButton mnemonicParsing="false" text="Yes" />
+                        <RadioButton mnemonicParsing="false" text="No" />
                      </children>
                   </VBox>
-                  <VBox layoutX="130.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0">
+                  <VBox layoutX="130.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notes">
                            <VBox.margin>
-                              <Insets bottom="10.0" />
+                              <Insets />
                            </VBox.margin>
                         </Text>
                         <TextField />
                      </children>
                      <HBox.margin>
-                        <Insets right="10.0" />
+                        <Insets />
                      </HBox.margin>
                   </VBox>
                </children>
@@ -195,14 +186,14 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <HBox layoutX="20.0" layoutY="77.0" prefHeight="52.0" prefWidth="738.0">
+            <HBox layoutX="20.0" layoutY="77.0" prefHeight="52.0" prefWidth="738.0" spacing="10.0">
                <padding>
                   <Insets top="10.0" />
                </padding>
                <children>
                   <Button mnemonicParsing="false" text="Generate Report">
                      <HBox.margin>
-                        <Insets right="10.0" />
+                        <Insets />
                      </HBox.margin>
                   </Button>
                   <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" text="Export Report" />

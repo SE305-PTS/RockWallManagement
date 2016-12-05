@@ -74,8 +74,12 @@
                         <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <children>
-                              <CheckBox mnemonicParsing="false" text="Male" />
-                              <CheckBox mnemonicParsing="false" text="Female" />
+                              <RadioButton mnemonicParsing="false" text="Male">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="Gender" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton mnemonicParsing="false" text="Female" toggleGroup="$Gender" />
                            </children>
                         </HBox>
                      </children>
@@ -97,7 +101,7 @@
             </VBox>
          </center>
          <top>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rock Wall Check-In" BorderPane.alignment="CENTER">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Waiver" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets top="10.0" />
                </BorderPane.margin>
