@@ -7,13 +7,13 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="783.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="783.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PTS.ViewPatrons">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="Rock Wall Management">
             <items>
-              <MenuItem mnemonicParsing="false" text="Return to Main Page" />
+              <MenuItem fx:id="viewPatronsExit" mnemonicParsing="false" text="Return to Main Page" />
             </items>
           </Menu>
         </menus>
@@ -24,7 +24,7 @@
          <children>
             <StackPane>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="View/Edit Inventory">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="View/Edit Patrons">
                      <font>
                         <Font size="24.0" />
                      </font></Text>
@@ -42,7 +42,7 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
@@ -55,7 +55,7 @@
                   </VBox>
                   <VBox layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Student ID">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
@@ -68,7 +68,55 @@
                   </VBox>
                   <VBox layoutX="130.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Retire Date">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Belay Certified">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Text>
+                        <CheckBox mnemonicParsing="false" text="Yes">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox layoutX="10.0" layoutY="36.0" mnemonicParsing="false" text="No" />
+                     </children>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox layoutX="350.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lead Certified">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Text>
+                        <CheckBox mnemonicParsing="false" text="Yes">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox layoutX="10.0" layoutY="36.0" mnemonicParsing="false" text="No" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="350.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Suspended">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Text>
+                        <CheckBox mnemonicParsing="false" text="Yes">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </CheckBox>
+                        <CheckBox layoutX="10.0" layoutY="36.0" mnemonicParsing="false" text="No" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="130.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notes">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
@@ -78,16 +126,6 @@
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
-                  </VBox>
-                  <VBox layoutX="240.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Purchase Price">
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </Text>
-                        <TextField />
-                     </children>
                   </VBox>
                </children>
                <VBox.margin>
@@ -101,10 +139,13 @@
             </Text>
             <TableView prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn prefWidth="178.0" text="ID" />
-                <TableColumn minWidth="0.0" prefWidth="214.0" text="Type" />
-                  <TableColumn prefWidth="180.0" text="Retire Date" />
-                  <TableColumn prefWidth="200.0" text="Purchase Price" />
+                <TableColumn prefWidth="113.0" text="First Name" />
+                <TableColumn prefWidth="107.0" text="Last Name" />
+                  <TableColumn prefWidth="93.0" text="ID" />
+                  <TableColumn prefWidth="89.0" text="Belay Certified" />
+                  <TableColumn prefWidth="88.0" text="Lead Certified" />
+                  <TableColumn prefWidth="112.0" text="Suspended" />
+                  <TableColumn prefWidth="170.0" text="Notes" />
               </columns>
             </TableView>
          </children>

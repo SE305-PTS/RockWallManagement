@@ -1,4 +1,4 @@
-package sample;
+package PTS;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
