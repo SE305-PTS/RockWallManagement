@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RockWallManagement.iml" filepath="$PROJECT_DIR$/RockWallManagement.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RockWallManagement.iml" filepath="$PROJECT_DIR$/.idea/modules/RockWallManagement.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RockWallManagement_main.iml" filepath="$PROJECT_DIR$/.idea/modules/RockWallManagement_main.iml" group="RockWallManagement" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RockWallManagement_test.iml" filepath="$PROJECT_DIR$/.idea/modules/RockWallManagement_test.iml" group="RockWallManagement" />
     </modules>
   </component>
 </project>

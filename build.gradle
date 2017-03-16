@@ -1,0 +1,69 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'idea'
+}
+
+mainClassName = 'PTS.RockWallManagementApp'
+version '0.01'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // log4j2
+    compile 'org.apache.logging.log4j:log4j-api:2.5'
+    compile 'org.apache.logging.log4j:log4j-core:2.5'
+    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.5'
+
+    // SQLiteJDBC - https://github.com/xerial/sqlite-jdbc
+    compile 'org.xerial:sqlite-jdbc:3.8.11.2'
+
+    // Apache Commons Lang - https://commons.apache.org/proper/commons-lang/
+    compile 'org.apache.commons:commons-lang3:3.4'
+
+    // Apache Commons DBCP - https://commons.apache.org/proper/commons-dbcp/
+    compile 'org.apache.commons:commons-dbcp2:2.1.1'
+
+    // Apache Commons DbUtils - https://commons.apache.org/proper/commons-dbutils/
+    compile 'commons-dbutils:commons-dbutils:1.6'
+
+    // Apache Commons IO - https://commons.apache.org/proper/commons-io/
+    compile 'commons-io:commons-io:2.4'
+
+    // GSON - https://github.com/google/gson
+    compile 'com.google.code.gson:gson:2.6.2'
+
+    // jsoup - http://jsoup.org/
+    compile 'org.jsoup:jsoup:1.8.3'
+}
+
+compileJava {
+    // Enable incremental compilation
+    options.incremental = true
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+        attributes 'Built-By': System.getProperty('user.name')
+        attributes 'Build-Jdk': System.getProperty('java.version')
+        attributes 'BUILD_NUMBER': System.env.BUILD_NUMBER ?: 'LOCAL'
+        attributes 'BUILD_URL': System.env.BUILD_URL ?: 'LOCAL'
+        attributes 'GIT_COMMIT': System.env.GIT_COMMIT ?: 'LOCAL'
+        attributes 'GIT_BRANCH': System.env.GIT_BRANCH ?: 'LOCAL'
+        attributes 'Implementation-Title': project.name
+        attributes 'Implementation-Version': project.version
+        attributes 'Implementation-Vendor-Id': project.group
+    }
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir "src/main/java"
+            includes = ["**/*.fxml", "**/*.xml", "**/*.js", "**/*.css", "**/*.sql"]
+        }
+    }
+}
