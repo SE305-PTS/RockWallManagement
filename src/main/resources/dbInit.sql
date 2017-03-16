@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS comics;
+CREATE TABLE comics (
+  comicsid INTEGER PRIMARY KEY AUTOINCREMENT,
+  url VARCHAR,
+  name VARCHAR,
+  lastchecked DATETIME
+);
