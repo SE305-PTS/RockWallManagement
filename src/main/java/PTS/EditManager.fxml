@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PTS.EditManagerController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <SplitPane dividerPositions="0.5" BorderPane.alignment="CENTER">
+              <items>
+                  <VBox alignment="CENTER" layoutX="20.0" layoutY="65.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Manager's Data" wrappingWidth="120.21875" />
+                        <GridPane hgap="12.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="271.0" vgap="20.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="102.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.0" minWidth="10.0" prefWidth="169.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <HBox alignment="CENTER_RIGHT">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="1">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" GridPane.rowIndex="1" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="2">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username" GridPane.rowIndex="3" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="3">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" GridPane.rowIndex="4" />
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="editManagerFirstName" GridPane.columnIndex="1" />
+                              <TextField fx:id="editManagerLastName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="editManagerUsername" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="editManagerPassword" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                           </children>
+                        </GridPane>
+                        <Button fx:id="editManagerSubmit" layoutX="91.0" layoutY="318.0" mnemonicParsing="false" text="Add Manager" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" layoutX="67.0" layoutY="27.0" spacing="12.0">
+                     <children>
+                        <Text layoutX="117.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table of Managers">
+                           <VBox.margin>
+                              <Insets top="12.0" />
+                           </VBox.margin>
+                        </Text>
+                        <TableView fx:id="editManagerTable" layoutX="67.0" layoutY="78.0">
+                          <columns>
+                            <TableColumn prefWidth="114.0" text="First Name" />
+                              <TableColumn prefWidth="105.0" text="Last Name" />
+                            <TableColumn prefWidth="113.0" text="Option" />
+                          </columns>
+                        </TableView>
+                     </children>
+                     <padding>
+                        <Insets left="12.0" right="12.0" />
+                     </padding>
+                  </VBox>
+              </items>
+            </SplitPane>
+         </center>
+         <top>
+            <MenuBar BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="Rock Wall Management">
+                  <items>
+                    <MenuItem fx:id="editManagerExit" mnemonicParsing="false" text="Return to Main Page" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>
