@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://logging.apache.org/log4j/2.x/manual/ -->
+<Configuration status="warn" name="default-config">
+    <Properties>
+        <Property name="LOG_ROOT">logs</Property>
+        <Property name="ARCHIVE">${LOG_ROOT}/archive/%d{yyyy-MM}</Property>
+        <Property name="PATTERN">%d [%t] %-5level: %m%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="stdout" target="SYSTEM_OUT">s
+            <PatternLayout pattern="${PATTERN}" />
+        </Console>
+        <RollingFile name="logWriter"
+                     fileName="${LOG_ROOT}/RockWallManagement.log"
+                     filePattern="${ARCHIVE}/RockWallManagement-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="${PATTERN}" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="2 GB" />
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="stdout" level="warn" />
+            <AppenderRef ref="logWriter" level="debug" />
+        </Root>
+    </Loggers>
+</Configuration>

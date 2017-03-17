@@ -23,6 +23,7 @@ public class MainPageController implements Initializable {
     @FXML private Button mainGenerateReports;
     @FXML private Button mainEditManagers;
     @FXML private Text mainAccessText;
+    @FXML private Button SQL;
 
     private RockWallManagementApp rockWallManagementApp;
 
@@ -85,6 +86,9 @@ public class MainPageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        SQL.setOnAction(e -> {
+            DBInterface.init();
+        });
         mainMenuExit.setOnAction(e -> System.exit(0));
     }
 

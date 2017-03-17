@@ -1,7 +1,6 @@
-DROP TABLE IF EXISTS comics;
-CREATE TABLE comics (
-  comicsid INTEGER PRIMARY KEY AUTOINCREMENT,
-  url VARCHAR,
-  name VARCHAR,
-  lastchecked DATETIME
+-- noinspection SqlNoDataSourceInspectionForFile
+
+DROP TABLE IF EXISTS Account;
+CREATE TABLE Account (
+  username VARCHAR PRIMARY KEY
 );

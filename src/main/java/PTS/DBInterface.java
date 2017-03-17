@@ -1,22 +1,29 @@
 package PTS;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.lang3.SystemUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.apache.commons.dbutils.DbUtils;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBInterface {
     private static final Logger log = LoggerFactory.getLogger(DBInterface.class);
     private static final BasicDataSource pool = new BasicDataSource();
-    private static final String appDirName = "Jomics";
+    private static final String appDirName = "RockWallManagement";
 
     static {
         try {
@@ -54,9 +61,11 @@ public class DBInterface {
     public static void init() {
         try {
             QueryRunner run = new QueryRunner(pool);
+            Connection conn = DriverManager.getConnection(pool.getUrl());
+            ResultSetHandler<Account> resultHandler = new BeanHandler<Account>(Account.class);
             String sql = new String(Files.readAllBytes(Paths.get(DBInterface.class.getResource("/dbInit.sql").toURI())));
-            sql = "DROP TABLE IF EXISTS comics; CREATE TABLE comics (comicsid INTEGER PRIMARY KEY AUTOINCREMENT, url VARCHAR, name VARCHAR, lastchecked DATETIME);";
-            run.update(sql);
+            run.query(conn, sql, resultHandler);
+            DbUtils.close(conn);
         } catch (SQLException | URISyntaxException | IOException e) {
             log.error("Failed to initialize DB", e);
         }

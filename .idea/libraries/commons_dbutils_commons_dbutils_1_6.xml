@@ -3,6 +3,7 @@
     <properties maven-id="commons-dbutils:commons-dbutils:1.6" />
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/commons-dbutils/commons-dbutils/1.6/commons-dbutils-1.6.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/commons-dbutils/commons-dbutils/1.6/commons-dbutils-1.6.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
