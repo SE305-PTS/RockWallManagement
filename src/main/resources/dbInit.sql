@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS Inventory (
   retiredate DATE NOT NULL,
   comments VARCHAR(80)
 );
-CREATE TABLE IF NOT EXISTS Manager (
+CREATE TABLE IF NOT EXISTS Account (
   username VARCHAR(30) PRIMARY KEY,
   password VARCHAR(30) NOT NULL,
   firstname VARCHAR(30) NOT NULL,

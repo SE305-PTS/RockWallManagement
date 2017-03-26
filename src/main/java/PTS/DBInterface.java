@@ -6,6 +6,7 @@ import org.apache.commons.logging.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.ConnectException;
 import java.sql.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -18,6 +19,8 @@ import java.sql.SQLException;
 public class DBInterface {
     private static final Logger log = LoggerFactory.getLogger(DBInterface.class);
     private static final String appDirName = "RockWallManagement";
+    private static String url;
+    private static Connection conn;
 
     public static Path getDataPath() throws IOException {
         Path path;
@@ -37,19 +40,41 @@ public class DBInterface {
 
     public static void init() {
         try {
-            String url = "jdbc:sqlite:" + Paths.get(getDataPath().toString(), "rockwall.db").toString();
-            Connection conn = DriverManager.getConnection(url);
+            url = "jdbc:sqlite:" + Paths.get(getDataPath().toString(), "rockwall.db").toString();
+            String sql = new String(Files.readAllBytes(Paths.get(DBInterface.class.getResource("/dbInit.sql").toURI())));
+            executeUpdate(sql);
+        } catch (URISyntaxException | IOException e) {
+            log.error("Failed to initialize database file", e);
+        }
+    }
+
+    public static int executeUpdate(String sql) {
+        int rc = -1;
+        try {
+            conn = DriverManager.getConnection(url);
             conn.setAutoCommit(true);
             Statement stmt = conn.createStatement();
-            String sql = new String(Files.readAllBytes(Paths.get(DBInterface.class.getResource("/dbInit.sql").toURI())));
-            stmt.executeUpdate(sql);
-            sql = "INSERT INTO Patron (id,firstname,lastname,gender,email,subscriber,belaycert,leadcert,suspension)"+
-                    " VALUES (0,\"Zach\",\"Needham\",\"M\",NULL,1,1,0,NULL)";
-            stmt.executeUpdate(sql);
+            rc = stmt.executeUpdate(sql);
             stmt.close();
             conn.close();
-        } catch (SQLException | URISyntaxException | IOException e) {
-            log.error("Failed to initialize database", e);
+        } catch (SQLException e) {
+            log.error("Could not execute the update query: ", e);
+        }
+        return rc;
+    }
+
+    public static ResultSet executeQuery(String sql) {
+        try {
+            conn = DriverManager.getConnection(url);
+            conn.setAutoCommit(true);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            stmt.close();
+            conn.close();
+            return rs;
+        } catch (SQLException e) {
+            log.error("Could not execute the ResultSet producing query: ", e);
+            return null;
         }
     }
 }
