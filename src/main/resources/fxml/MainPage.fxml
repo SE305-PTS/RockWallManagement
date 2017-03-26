@@ -62,7 +62,6 @@
                         <Insets />
                      </VBox.margin>
                   </ImageView>
-                  <Button fx:id="SQL" mnemonicParsing="false" text="SQL - DEL ME" />
                   <VBox alignment="CENTER" spacing="12.0">
                      <children>
                         <HBox alignment="CENTER">
