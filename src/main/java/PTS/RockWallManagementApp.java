@@ -30,7 +30,7 @@ public class RockWallManagementApp extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Rock Wall Management");
-
+        DBInterface.init();
         showMainPage();
     }
 
