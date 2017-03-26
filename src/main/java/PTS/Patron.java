@@ -1,7 +1,7 @@
 package PTS;
 
 public class Patron {
-    private String ID;
+    private int ID;
     private String firstName;
     private String lastName;
     private String gender;
@@ -11,7 +11,7 @@ public class Patron {
     private boolean leadCertified;
     private String suspended;
 
-    Patron(String ID, String firstName, String lastName, String gender, String emailAddress, boolean optIn) {
+    Patron(int ID, String firstName, String lastName, String gender, String emailAddress, boolean optIn) {
         this.ID = ID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -24,11 +24,11 @@ public class Patron {
 
     }
 
-    public String getID() {
+    public int getID() {
         return ID;
     }
 
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 

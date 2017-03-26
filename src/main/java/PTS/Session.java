@@ -1,31 +1,31 @@
 package PTS;
 
 public class Session {
-    private String sessionID;
-    private String patronID;
+    private int sessionID;
+    private int patronID;
     private String checkIn;
     private String checkOut;
 
-    Session(String sessionID, String patronID, String checkIn, String checkOut) {
+    Session(int sessionID, int patronID, String checkIn, String checkOut) {
         this.sessionID = sessionID;
         this.patronID = patronID;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
     }
 
-    public String getSessionID() {
+    public int getSessionID() {
         return sessionID;
     }
 
-    public void setSessionID(String sessionID) {
+    public void setSessionID(int sessionID) {
         this.sessionID = sessionID;
     }
 
-    public String getPatronID() {
+    public int getPatronID() {
         return patronID;
     }
 
-    public void setPatronID(String patronID) {
+    public void setPatronID(int patronID) {
         this.patronID = patronID;
     }
 

@@ -2,13 +2,13 @@ package PTS;
 
 
 public class Item {
-    private String ID;
+    private int ID;
     private String type;
     private String retireDate;
     private String purchaseDate;
     private String notes;
 
-    Item(String ID, String type, String retireDate, String purchaseDate, String notes) {
+    Item(int ID, String type, String retireDate, String purchaseDate, String notes) {
         this.ID = ID;
         this.type = type;
         this.retireDate = retireDate;
@@ -16,11 +16,11 @@ public class Item {
         this.notes = notes;
     }
 
-    public String getID() {
+    public int getID() {
         return ID;
     }
 
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 
