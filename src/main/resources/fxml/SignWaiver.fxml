@@ -92,7 +92,7 @@
                         </HBox>
                      </children>
                   </GridPane>
-                  <CheckBox fx:id="signWaiverEmail" mnemonicParsing="false" text="Keep me updated on events through email">
+                  <CheckBox fx:id="signWaiverEmailOptIn" mnemonicParsing="false" text="Keep me updated on events through email">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>

@@ -56,7 +56,7 @@ jar {
 sourceSets {
     main {
         resources {
-            srcDir "src/main/java"
+            srcDir "src/main/resources"
             includes = ["**/*.fxml", "**/*.xml", "**/*.js", "**/*.css", "**/*.sql", "**/*.png"]
         }
     }

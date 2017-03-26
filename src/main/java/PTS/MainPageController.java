@@ -57,7 +57,7 @@ public class MainPageController implements Initializable {
         });
     }
 
-    public void changeAccessView(RockWallManagementApp.Role accessLevel) {
+    private void changeAccessView(RockWallManagementApp.Role accessLevel) {
         switch (accessLevel) {
             case EMPLOYEE:
                 mainEditManagers.setVisible(false);
