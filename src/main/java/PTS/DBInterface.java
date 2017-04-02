@@ -77,4 +77,14 @@ public class DBInterface {
             return null;
         }
     }
+
+    public static String BoolToString(boolean bool) {
+        String out;
+        if (bool) {
+            out = "1";
+        } else {
+            out = "0";
+        }
+        return out;
+    }
 }
