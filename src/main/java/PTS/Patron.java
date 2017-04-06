@@ -20,8 +20,7 @@ public class Patron {
         this.emailOptIn = optIn;
         this.belayCertified = false;
         this.leadCertified = false;
-        this.suspended = "";
-
+        this.suspended = null;
     }
 
     public int getID() {

@@ -1,6 +1,7 @@
 package PTS;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.slf4j.Logger;
@@ -20,7 +21,25 @@ public class DBInterface {
     private static final Logger log = LoggerFactory.getLogger(DBInterface.class);
     private static final String appDirName = "RockWallManagement";
     private static String url;
-    private static Connection conn;
+
+    public static String getUrl() {
+        return url;
+    }
+
+    public static void init() {
+        try {
+            url = "jdbc:sqlite:" + Paths.get(getDataPath().toString(), "rockwall.db").toString();
+            String sql = new String(Files.readAllBytes(Paths.get(DBInterface.class.getResource("/dbInit.sql").toURI())));
+            Connection conn = DriverManager.getConnection(url);
+            conn.setAutoCommit(true);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+            stmt.closeOnCompletion();
+        } catch (URISyntaxException | IOException | SQLException e) {
+            log.error("Failed to initialize database file", e);
+        }
+        /*TODO Remove when done testing*/test();
+    }
 
     public static Path getDataPath() throws IOException {
         Path path;
@@ -38,53 +57,17 @@ public class DBInterface {
         return path;
     }
 
-    public static void init() {
-        try {
-            url = "jdbc:sqlite:" + Paths.get(getDataPath().toString(), "rockwall.db").toString();
-            String sql = new String(Files.readAllBytes(Paths.get(DBInterface.class.getResource("/dbInit.sql").toURI())));
-            executeUpdate(sql);
-        } catch (URISyntaxException | IOException e) {
-            log.error("Failed to initialize database file", e);
-        }
-    }
-
-    public static int executeUpdate(String sql) {
-        int rc = -1;
-        try {
-            conn = DriverManager.getConnection(url);
-            conn.setAutoCommit(true);
-            Statement stmt = conn.createStatement();
-            rc = stmt.executeUpdate(sql);
-            stmt.close();
-            conn.close();
-        } catch (SQLException e) {
-            log.error("Could not execute the update query: ", e);
-        }
-        return rc;
-    }
-
-    public static ResultSet executeQuery(String sql) {
-        try {
-            conn = DriverManager.getConnection(url);
-            conn.setAutoCommit(true);
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            stmt.close();
-            conn.close();
-            return rs;
-        } catch (SQLException e) {
-            log.error("Could not execute the ResultSet producing query: ", e);
-            return null;
-        }
-    }
-
-    public static String BoolToString(boolean bool) {
-        String out;
-        if (bool) {
-            out = "1";
-        } else {
-            out = "0";
-        }
-        return out;
+    /*TODO Remove when done testing*/private static void test() {
+        Patron pat = new Patron(7336666, "Mitchell", "Petit", "M", "mitchell.petit@jacks.sdstate.edu", false);
+        PatronTableDAO.insert(pat);
+        pat = new Patron(7336667, "Test", "Test", "F", null, false);
+        PatronTableDAO.insert(pat);
+        pat.setFirstName("Test2");
+        pat.setLastName("Test2");
+        pat.setGender("M");
+        PatronTableDAO.update(pat);
+        PatronTableDAO.selectAll();
+        PatronTableDAO.delete(7336666);
+        PatronTableDAO.selectAll();
     }
 }
