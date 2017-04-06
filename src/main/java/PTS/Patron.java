@@ -23,6 +23,18 @@ public class Patron {
         this.suspended = null;
     }
 
+    Patron(int ID, String firstName, String lastName) {
+        this.ID = ID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = null;
+        this.emailAddress = null;
+        this.emailOptIn = false;
+        this.belayCertified = false;
+        this.leadCertified = false;
+        this.suspended = null;
+    }
+
     public int getID() {
         return ID;
     }
