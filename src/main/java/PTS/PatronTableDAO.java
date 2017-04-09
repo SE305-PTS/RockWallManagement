@@ -13,21 +13,20 @@ import java.util.List;
 public class PatronTableDAO {
     private static final Logger log = LoggerFactory.getLogger(PatronTableDAO.class);
 
-    public static void insert(Patron pat) {
+    public static void insert(Patron item) {
         String query = "INSERT INTO Patron(id,firstname,lastname,gender,email,subscriber,belaycert,leadcert,suspension) VALUES (?,?,?,?,?,?,?,?,?)";
         try {
             Connection conn = DriverManager.getConnection(DBInterface.getUrl());
-            conn.setAutoCommit(true);
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, pat.getID());
-            stmt.setString(2, pat.getFirstName());
-            stmt.setString(3, pat.getLastName());
-            stmt.setString(4, pat.getGender());
-            stmt.setString(5, pat.getEmailAddress());
-            stmt.setBoolean(6, pat.getEmailOptIn());
-            stmt.setBoolean(7, pat.getBelayCertified());
-            stmt.setBoolean(8, pat.getLeadCertified());
-            stmt.setString(9, pat.getSuspended());
+            stmt.setInt(1, item.getID());
+            stmt.setString(2, item.getFirstName());
+            stmt.setString(3, item.getLastName());
+            stmt.setString(4, item.getGender());
+            stmt.setString(5, item.getEmailAddress());
+            stmt.setBoolean(6, item.getEmailOptIn());
+            stmt.setBoolean(7, item.getBelayCertified());
+            stmt.setBoolean(8, item.getLeadCertified());
+            stmt.setString(9, item.getSuspended());
             stmt.executeUpdate();
             stmt.closeOnCompletion();
         } catch (SQLException e) {
@@ -35,8 +34,8 @@ public class PatronTableDAO {
         }
     }
 
-    public static void insert(Patron patrons[]) {
-        for (Patron i : patrons) {
+    public static void insert(Patron array[]) {
+        for (Patron i : array) {
             insert(i);
         }
     }
@@ -45,7 +44,6 @@ public class PatronTableDAO {
         String query = "DELETE FROM Patron WHERE id = ?";
         try {
             Connection conn = DriverManager.getConnection(DBInterface.getUrl());
-            conn.setAutoCommit(true);
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -55,28 +53,28 @@ public class PatronTableDAO {
         }
     }
 
-    public static void delete(int id[]) {
-        for (int i : id) {
+    public static void delete(int array[]) {
+        for (int i : array) {
             delete(i);
         }
     }
 
-    public static void update(Patron pat) {
+    public static void update(Patron item) {
         String query = "UPDATE Patron Set firstname = ?, lastname = ?, gender = ?, email = ?, subscriber = ?, belaycert = ?, leadcert = ?, suspension = ?";
         query = query + " WHERE id = ?";
         try {
             Connection conn = DriverManager.getConnection(DBInterface.getUrl());
             conn.setAutoCommit(true);
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, pat.getFirstName());
-            stmt.setString(2, pat.getLastName());
-            stmt.setString(3, pat.getGender());
-            stmt.setString(4, pat.getEmailAddress());
-            stmt.setBoolean(5, pat.getEmailOptIn());
-            stmt.setBoolean(6, pat.getBelayCertified());
-            stmt.setBoolean(7, pat.getLeadCertified());
-            stmt.setString(8, pat.getSuspended());
-            stmt.setInt(9, pat.getID());
+            stmt.setString(1, item.getFirstName());
+            stmt.setString(2, item.getLastName());
+            stmt.setString(3, item.getGender());
+            stmt.setString(4, item.getEmailAddress());
+            stmt.setBoolean(5, item.getEmailOptIn());
+            stmt.setBoolean(6, item.getBelayCertified());
+            stmt.setBoolean(7, item.getLeadCertified());
+            stmt.setString(8, item.getSuspended());
+            stmt.setInt(9, item.getID());
             stmt.executeUpdate();
             stmt.closeOnCompletion();
         } catch (SQLException e) {
@@ -84,8 +82,8 @@ public class PatronTableDAO {
         }
     }
 
-    public static void update(Patron patrons[]) {
-        for (Patron i : patrons) {
+    public static void update(Patron array[]) {
+        for (Patron i : array) {
             update(i);
         }
     }
@@ -120,7 +118,7 @@ public class PatronTableDAO {
         return observable;
     }
 
-    public static Patron getById(int id) {
+    public static Patron getByID(int id) {
         String query = "SELECT id,firstname,lastname,gender,email,subscriber,belaycert,leadcert,suspension FROM Patron";
         query = query + " WHERE id = ?";
         Patron pat = new Patron();
