@@ -77,7 +77,7 @@ public class AccountTableDAO {
         }
     }
 
-    public static ObservableList<Account> selectAll() {
+    public static ObservableList<Account> select() {
         String query = "SELECT username, password,firstname,lastname,type FROM Account";
         List<Account> list = new ArrayList<>();
         ObservableList<Account> observable;
