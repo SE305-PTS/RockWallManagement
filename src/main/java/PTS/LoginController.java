@@ -26,11 +26,17 @@ public class LoginController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         loginSubmit.setOnAction(e -> {
             try {
-                Parent root;
-                if (Objects.equals(loginUsername.getText(), "Admin")) {
-                    rockWallManagementApp.setAccessLevel(RockWallManagementApp.Role.ADMINISTRATOR);
-                } else if (Objects.equals(loginUsername.getText(), "Manager")) {
-                    rockWallManagementApp.setAccessLevel(RockWallManagementApp.Role.MANAGER);
+                if (!(loginUsername.getText().isEmpty() || loginPassword.getText().isEmpty())) {
+                    Account account = AccountTableDAO.get(loginUsername.getText());
+                    if (account != null) {
+                        if (Objects.equals(account.getPassword(), loginPassword.getText())) {
+                            if (Objects.equals(account.getType(), "Administrator")) {
+                                rockWallManagementApp.setAccessLevel(RockWallManagementApp.Role.ADMINISTRATOR);
+                            } else if (Objects.equals(account.getType(), "Manager")) {
+                                rockWallManagementApp.setAccessLevel(RockWallManagementApp.Role.MANAGER);
+                            }
+                        }
+                    }
                 }
 
                 rockWallManagementApp.showMainPage();
