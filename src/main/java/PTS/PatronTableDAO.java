@@ -88,8 +88,48 @@ public class PatronTableDAO {
         }
     }
 
-    public static ObservableList<Patron> selectAll() {
+    public static ObservableList<Patron> select() {
         String query = "SELECT id,firstname,lastname,gender,email,subscriber,belaycert,leadcert,suspension FROM Patron";
+        List<Patron> list = new ArrayList<>();
+        ObservableList<Patron> observable;
+        try {
+            Connection conn = DriverManager.getConnection(DBInterface.getUrl());
+            PreparedStatement stmt = conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                Patron current = new Patron();
+                current.setID(rs.getInt("id"));
+                current.setFirstName(rs.getString("firstname"));
+                current.setLastName(rs.getString("lastname"));
+                current.setGender(rs.getString("gender"));
+                current.setEmailAddress(rs.getString("email"));
+                current.setEmailOptIn(rs.getBoolean("subscriber"));
+                current.setBelayCertified(rs.getBoolean("belaycert"));
+                current.setLeadCertified(rs.getBoolean("leadcert"));
+                current.setSuspended(rs.getString("suspension"));
+                list.add(current);
+            }
+            stmt.closeOnCompletion();
+            rs.close();
+        } catch (SQLException e) {
+            log.error("Could not select from Patron: ", e);
+        }
+        observable = FXCollections.observableArrayList(list);
+        return observable;
+    }
+
+    public static ObservableList<Patron> select(String id, String firstname, String lastname, String belaycert, String leadcert, String suspended) {
+        String query = "SELECT id,firstname,lastname,gender,email,subscriber,belaycert,leadcert,suspension FROM Patron WHERE";
+        if(id != null) query = query + " id=" + id + " and";
+        if(firstname != null) query = query + " firstname=\"" + firstname + "\" and";
+        if(lastname != null) query = query + " lastname=\"" + lastname + "\" and";
+        if(belaycert.equals("Y")) query = query + " belaycert=1 and";
+        else if(belaycert.equals("N")) query = query + " belaycert=0 and";
+        if(leadcert.equals("Y")) query = query + " leadcert=1 and";
+        else if(leadcert.equals("N")) query = query + " leadcert=0 and";
+        if(suspended.equals("Y")) query = query + " suspension>\"now\"";
+        else if(suspended.equals("N")) query = query + " (suspension<\"now\" or suspension IS NULL)";
+        else query = query = query + " (suspension IS NULL or suspension IS NOT NULL)";
         List<Patron> list = new ArrayList<>();
         ObservableList<Patron> observable;
         try {
