@@ -11,6 +11,17 @@ public class Patron {
     private boolean leadCertified;
     private String suspended;
 
+    Patron() {
+        this.firstName = null;
+        this.lastName = null;
+        this.gender = null;
+        this.emailAddress = null;
+        this.emailOptIn = false;
+        this.belayCertified = false;
+        this.leadCertified = false;
+        this.suspended = null;
+    }
+
     Patron(int ID, String firstName, String lastName, String gender, String emailAddress, boolean optIn) {
         this.ID = ID;
         this.firstName = firstName;

@@ -7,6 +7,14 @@ public class Account {
     private String lastName;
     private String type;
 
+    Account() {
+        this.username = null;
+        this.password = null;
+        this.firstName = null;
+        this.lastName = null;
+        this.type = null;
+    }
+
     Account(String username, String password, String firstName, String lastName, String type) {
         this.username = username;
         this.password = password;

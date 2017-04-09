@@ -1,5 +1,6 @@
 package PTS;
 
+import javafx.collections.ObservableList;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.SystemUtils;
@@ -68,6 +69,6 @@ public class DBInterface {
         PatronTableDAO.update(pat);
         PatronTableDAO.selectAll();
         PatronTableDAO.delete(7336666);
-        PatronTableDAO.selectAll();
+        ObservableList<Patron> list = PatronTableDAO.selectAll();
     }
 }
