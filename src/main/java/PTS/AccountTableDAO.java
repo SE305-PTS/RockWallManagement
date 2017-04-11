@@ -121,7 +121,7 @@ public class AccountTableDAO {
             stmt.closeOnCompletion();
             rs.close();
         } catch (SQLException e) {
-            log.error("Could not update Patron in Database", e);
+            log.error("Could not find Account in Database", e);
         }
         return item;
     }

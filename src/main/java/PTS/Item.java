@@ -8,6 +8,13 @@ public class Item {
     private String purchaseDate;
     private String notes;
 
+    Item() {
+        this.type = null;
+        this.retireDate = null;
+        this.purchaseDate = null;
+        this.notes = null;
+    }
+
     Item(int ID, String type, String retireDate, String purchaseDate, String notes) {
         this.ID = ID;
         this.type = type;

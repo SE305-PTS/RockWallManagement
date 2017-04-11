@@ -6,6 +6,11 @@ public class Session {
     private String checkIn;
     private String checkOut;
 
+    Session() {
+        this.checkIn = null;
+        this.checkOut = null;
+    }
+
     Session(int sessionID, int patronID, String checkIn, String checkOut) {
         this.sessionID = sessionID;
         this.patronID = patronID;

@@ -66,7 +66,6 @@ public class PatronTableDAO {
         query = query + " WHERE id = ?";
         try {
             Connection conn = DriverManager.getConnection(DBInterface.getUrl());
-            conn.setAutoCommit(true);
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, pat.getFirstName());
             stmt.setString(2, pat.getLastName());
@@ -123,28 +122,28 @@ public class PatronTableDAO {
     public static Patron getByID(int id) {
         String query = "SELECT id,firstname,lastname,gender,email,subscriber,belaycert,leadcert,suspension FROM Patron";
         query = query + " WHERE id = ?";
-        Patron pat = new Patron();
+        Patron current = new Patron();
         try {
             Connection conn = DriverManager.getConnection(DBInterface.getUrl());
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
-                pat.setID(rs.getInt("id"));
-                pat.setFirstName(rs.getString("firstname"));
-                pat.setLastName(rs.getString("lastname"));
-                pat.setGender(rs.getString("gender"));
-                pat.setEmailAddress(rs.getString("email"));
-                pat.setEmailOptIn(rs.getBoolean("subscriber"));
-                pat.setBelayCertified(rs.getBoolean("belaycert"));
-                pat.setLeadCertified(rs.getBoolean("leadcert"));
-                pat.setSuspended(rs.getString("suspension"));
+                current.setID(rs.getInt("id"));
+                current.setFirstName(rs.getString("firstname"));
+                current.setLastName(rs.getString("lastname"));
+                current.setGender(rs.getString("gender"));
+                current.setEmailAddress(rs.getString("email"));
+                current.setEmailOptIn(rs.getBoolean("subscriber"));
+                current.setBelayCertified(rs.getBoolean("belaycert"));
+                current.setLeadCertified(rs.getBoolean("leadcert"));
+                current.setSuspended(rs.getString("suspension"));
             }
             stmt.closeOnCompletion();
             rs.close();
         } catch (SQLException e) {
-            log.error("Could not update Patron in Database", e);
+            log.error("Could not find Patron in Database", e);
         }
-        return pat;
+        return current;
     }
 }
