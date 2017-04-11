@@ -26,7 +26,7 @@ public class LoginController implements Initializable {
         loginSubmit.setOnAction(e -> {
             try {
                 if (!(loginUsername.getText().isEmpty() || loginPassword.getText().isEmpty())) {
-                    Account account = AccountTableDAO.getByID(Integer.parseInt(loginUsername.getText())); //incorrect, should be by username
+                    Account account = AccountTableDAO.getByUsername(loginUsername.getText());
                     if (account != null) {
                         if (Objects.equals(account.getPassword(), loginPassword.getText())) {
                             if (Objects.equals(account.getType(), "Administrator")) {

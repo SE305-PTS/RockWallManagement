@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PTS.ViewPatronsController">
+<AnchorPane prefHeight="600.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PTS.ViewPatronsController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -76,6 +76,21 @@
                               <TextField fx:id="patronLastNameField" />
                            </children>
                         </VBox>
+                        <VBox>
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Subscriber">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <CheckBox fx:id="patronSubscriberYes" mnemonicParsing="false" text="Yes">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </CheckBox>
+                              <CheckBox fx:id="patronSubscriberNo" layoutX="10.0" layoutY="36.0" mnemonicParsing="false" text="No" />
+                           </children>
+                        </VBox>
                         <VBox layoutX="130.0" layoutY="20.0">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Belay Certified">
@@ -134,19 +149,22 @@
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <TableView fx:id="viewPatronsTable">
+                  <TableView fx:id="viewPatronsTable" editable="true">
                     <columns>
                         <TableColumn fx:id="idColumn" prefWidth="100.0" text="ID" />
                       <TableColumn fx:id="firstNameColumn" prefWidth="171.0" text="First Name" />
                       <TableColumn fx:id="lastNameColumn" prefWidth="171.0" text="Last Name" />
-                        <TableColumn fx:id="belayColumn" prefWidth="111.0" text="Belay Certified" />
-                        <TableColumn fx:id="leadColumn" minWidth="8.0" prefWidth="129.0" text="Lead Certified" />
-                        <TableColumn fx:id="suspendedColumn" prefWidth="93.0" text="Suspended" />
+                        <TableColumn fx:id="emailColumn" prefWidth="150.0" text="Email" />
+                        <TableColumn fx:id="subscriberColumn" minWidth="0.0" prefWidth="81.0" text="Subscriber" />
+                        <TableColumn fx:id="belayColumn" prefWidth="108.0" text="Belay Certified" />
+                        <TableColumn fx:id="leadColumn" minWidth="8.0" prefWidth="99.0" text="Lead Certified" />
+                        <TableColumn fx:id="suspendedColumn" prefWidth="116.0" text="Suspended" />
                     </columns>
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </TableView>
+                  <Button fx:id="deletePatron" mnemonicParsing="false" text="Delete Selected Patron" />
                </children>
                <padding>
                   <Insets top="12.0" />
