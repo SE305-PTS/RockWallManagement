@@ -19,7 +19,7 @@ public class Patron {
         this.emailOptIn = false;
         this.belayCertified = false;
         this.leadCertified = false;
-        this.suspended = null;
+        this.suspended = "";
     }
 
     Patron(int ID, String firstName, String lastName, String gender, String emailAddress, boolean optIn) {
@@ -31,7 +31,7 @@ public class Patron {
         this.emailOptIn = optIn;
         this.belayCertified = false;
         this.leadCertified = false;
-        this.suspended = null;
+        this.suspended = "";
     }
 
     Patron(int ID, String firstName, String lastName) {
@@ -43,7 +43,7 @@ public class Patron {
         this.emailOptIn = false;
         this.belayCertified = false;
         this.leadCertified = false;
-        this.suspended = null;
+        this.suspended = "";
     }
 
     public int getID() {

@@ -60,6 +60,7 @@ public class DBInterface {
 
     /*TODO Remove when done testing*/private static void test() {
         Patron pat = new Patron(7336666, "Mitchell", "Petit", "M", "mitchell.petit@jacks.sdstate.edu", false);
+        pat.setSuspended("2017-10-09 12:24:32");
         PatronTableDAO.insert(pat);
         pat = new Patron(7336667, "Test", "Test", "F", null, false);
         PatronTableDAO.insert(pat);
@@ -68,7 +69,7 @@ public class DBInterface {
         pat.setGender("M");
         PatronTableDAO.update(pat);
         PatronTableDAO.selectAll();
-        PatronTableDAO.delete(7336666);
+//        PatronTableDAO.delete(7336666);
         ObservableList<Patron> list = PatronTableDAO.selectAll();
     }
 }

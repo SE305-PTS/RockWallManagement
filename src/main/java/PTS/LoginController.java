@@ -11,7 +11,6 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
     @FXML private Button loginSubmit;
-    @FXML private MenuBar loginMenuBar;
     @FXML private MenuItem loginReturnMainPage;
     @FXML private TextField loginUsername;
     @FXML private PasswordField loginPassword;
@@ -27,7 +26,7 @@ public class LoginController implements Initializable {
         loginSubmit.setOnAction(e -> {
             try {
                 if (!(loginUsername.getText().isEmpty() || loginPassword.getText().isEmpty())) {
-                    Account account = AccountTableDAO.get(loginUsername.getText());
+                    Account account = AccountTableDAO.getByID(Integer.parseInt(loginUsername.getText())); //incorrect, should be by username
                     if (account != null) {
                         if (Objects.equals(account.getPassword(), loginPassword.getText())) {
                             if (Objects.equals(account.getType(), "Administrator")) {

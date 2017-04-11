@@ -26,7 +26,7 @@ public class CheckInOutController implements Initializable {
         });
         checkInOutSubmit.setOnAction(e -> {
             if (!checkInOutID.getText().isEmpty()) {
-                Patron patron = PatronTableDAO.get(Integer.parseInt(checkInOutID.getText()));
+                Patron patron = PatronTableDAO.getByID(Integer.parseInt(checkInOutID.getText()));
                 if (patron != null) {
                     if (patron.getID() == Integer.parseInt(checkInOutID.getText())) {
                         LocalDateTime time = LocalDateTime.now();
@@ -55,6 +55,8 @@ public class CheckInOutController implements Initializable {
                             minute = "" + time.getMinute();
                         }
                         String timeStamp = "" + time.getYear() + "-" + month + "-" + day + " " + hour + ":" + minute;
+
+
                         rockWallManagementApp.showMainPage();
                     }
                 }

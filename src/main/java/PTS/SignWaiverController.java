@@ -29,7 +29,7 @@ public class SignWaiverController implements Initializable {
             boolean validID = false;
 
             if (!signWaiverID.getText().isEmpty()) {
-                if (PatronTableDAO.get(signWaiverID.getText()) == null) {
+                if (PatronTableDAO.getByID(Integer.parseInt(signWaiverID.getText())) == null) {
                     validID = true;
                 }
             }
@@ -47,7 +47,7 @@ public class SignWaiverController implements Initializable {
                 } else if (signWaiverFemale.isSelected()) {
                     patron.setGender("Female");
                 }
-                PatronTableDAO.add(patron);
+                PatronTableDAO.insert(patron);
                 rockWallManagementApp.showMainPage();
             } else {
             }
