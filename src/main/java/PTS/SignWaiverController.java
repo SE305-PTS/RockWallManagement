@@ -22,14 +22,12 @@ public class SignWaiverController implements Initializable {
 
     public void setRockWallManagementApp(RockWallManagementApp app) {
         rockWallManagementApp = app;
-        signWaiverExit.setOnAction(e -> {
-            rockWallManagementApp.showMainPage();
-        });
+        signWaiverExit.setOnAction(e -> rockWallManagementApp.showMainPage());
         signWaiverSubmit.setOnAction(e -> {
             boolean validID = false;
 
             if (!signWaiverID.getText().isEmpty()) {
-                if (PatronTableDAO.getByID(Integer.parseInt(signWaiverID.getText())).getID() == 0) {
+                if (PatronTableDAO.getByID(Integer.parseInt(signWaiverID.getText())).getFirstName() == null) {
                     validID = true;
                 }
             }
