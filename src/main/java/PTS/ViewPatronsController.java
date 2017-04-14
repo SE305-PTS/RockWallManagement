@@ -22,6 +22,7 @@ import static PTS.RockWallManagementApp.Role.MANAGER;
 
 public class ViewPatronsController implements Initializable {
     private ObservableList<Patron> patronObservableList = FXCollections.observableArrayList();
+    private FilteredList<Patron> filteredPatronList = new FilteredList<Patron>(select(), p -> true);
 
     @FXML public MenuItem viewPatronsExit;
     @FXML public Text viewPatronsTitle;
@@ -59,6 +60,7 @@ public class ViewPatronsController implements Initializable {
         initTableView();
         deletePatron.setOnAction(e -> {
             Patron temp = viewPatronsTable.getSelectionModel().getSelectedItem();
+            filteredPatronList.remove(temp);
             patronObservableList.remove(temp);
             PatronTableDAO.delete(temp.getID());
         });
@@ -92,8 +94,6 @@ public class ViewPatronsController implements Initializable {
     }
 
     private void initTableView() {
-
-        FilteredList<Patron> filteredPatronList = new FilteredList<Patron>(select(), p -> true);
 
         patronObservableList.setAll(filteredPatronList);
 

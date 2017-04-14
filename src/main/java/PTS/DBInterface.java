@@ -39,6 +39,16 @@ public class DBInterface {
         } catch (URISyntaxException | IOException | SQLException e) {
             log.error("Failed to initialize database file", e);
         }
+
+        Patron pat = new Patron(7336666, "Mitchell", "Petit", "M", "mitchell.petit@jacks.sdstate.edu", false);
+        pat.setSuspended("2017-10-09 12:24:32");
+        PatronTableDAO.insert(pat);
+        Item item = new Item();
+        item.setID(1234);
+        item.setType("Rope");
+        item.setRetireDate("2017-06-01 12:25");
+        item.setPrice(3.50);
+        InventoryTableDAO.insert(item);
     }
 
     public static Path getDataPath() throws IOException {

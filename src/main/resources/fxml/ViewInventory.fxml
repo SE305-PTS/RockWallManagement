@@ -7,7 +7,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PTS.ViewInventoryController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -87,7 +86,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Text>
-                              <TextField fx:id="inventoryPurchaseField" />
+                              <TextField fx:id="inventoryPriceField" />
                            </children>
                         </VBox>
                      </children>
@@ -102,12 +101,84 @@
                   </Text>
                   <TableView fx:id="viewInventoryTable">
                     <columns>
-                      <TableColumn prefWidth="178.0" text="ID" />
-                      <TableColumn minWidth="0.0" prefWidth="214.0" text="Type" />
-                        <TableColumn prefWidth="180.0" text="Retire Date" />
-                        <TableColumn prefWidth="200.0" text="Purchase Price" />
+                      <TableColumn fx:id="inventoryIDColumn" prefWidth="178.0" text="ID" />
+                      <TableColumn fx:id="inventoryTypeColumn" minWidth="0.0" prefWidth="214.0" text="Type" />
+                        <TableColumn fx:id="inventoryRetireColumn" prefWidth="180.0" text="Retire Date" />
+                        <TableColumn fx:id="inventoryPriceColumn" prefWidth="200.0" text="Purchase Price" />
                     </columns>
                   </TableView>
+                  <HBox spacing="12.0">
+                     <children>
+                        <Button fx:id="deleteItem" mnemonicParsing="false" text="Delete Selected Item" />
+                        <Button fx:id="inventoryExport" mnemonicParsing="false" text="Export Inventory Report" />
+                     </children>
+                  </HBox>
+                  <VBox fx:id="inventoryAddItemVBox" spacing="12.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Item">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                        <HBox spacing="12.0">
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Text>
+                                    <TextField fx:id="inventoryAddID" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox layoutX="20.0" layoutY="20.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Text>
+                                    <TextField fx:id="inventoryAddType" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox layoutX="130.0" layoutY="20.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Retire Date">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Text>
+                                    <TextField fx:id="inventoryAddRetire" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox layoutX="240.0" layoutY="20.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Purchase Price">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Text>
+                                    <TextField fx:id="inventoryAddPrice" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <Button fx:id="inventoryAddButton" mnemonicParsing="false" text="Add Item" />
+                     </children>
+                     <padding>
+                        <Insets top="12.0" />
+                     </padding>
+                  </VBox>
                </children>
                <BorderPane.margin>
                   <Insets bottom="20.0" left="12.0" right="12.0" top="20.0" />
