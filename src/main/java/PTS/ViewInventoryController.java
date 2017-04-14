@@ -11,19 +11,14 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.converter.DoubleStringConverter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.regex.PatternSyntaxException;
-
-import static PTS.RockWallManagementApp.Role.ADMINISTRATOR;
-import static PTS.RockWallManagementApp.Role.MANAGER;
 
 public class ViewInventoryController implements Initializable {
     private ObservableList<Item> inventoryObservableList = FXCollections.observableArrayList();
-    private FilteredList<Item> filteredInventoryList = new FilteredList<Item>(InventoryTableDAO.select(), p -> true);
+    private ObservableList<Item> filteredListSource = InventoryTableDAO.select();
+    private FilteredList<Item> filteredInventoryList = new FilteredList<>(filteredListSource, p -> true);
 
     @FXML public MenuItem viewInventoryExit;
     @FXML public Text viewInventoryTitle;
@@ -35,7 +30,7 @@ public class ViewInventoryController implements Initializable {
     @FXML public TableColumn<Item, Integer> inventoryIDColumn;
     @FXML public TableColumn<Item, String> inventoryTypeColumn;
     @FXML public TableColumn<Item, String> inventoryRetireColumn;
-//    @FXML public TableColumn<Item, Double> inventoryPriceColumn;
+    @FXML public TableColumn<Item, Double> inventoryPriceColumn;
     @FXML public Button deleteItem;
     @FXML public Button inventoryExport;
     @FXML public Button inventoryAddButton;
@@ -57,23 +52,21 @@ public class ViewInventoryController implements Initializable {
             Item item = new Item();
             if (!(inventoryAddID.getText().isEmpty() || inventoryAddType.getText().isEmpty() || inventoryAddRetire.getText().isEmpty() || inventoryAddPrice.getText().isEmpty())) {
                 if (InventoryTableDAO.getByID(Integer.parseInt(inventoryAddID.getText())).getType() == null) {
-                    if (inventoryAddRetire.getText().matches("\\d{4}[-]{1}\\d{2}[-]{1}\\d{2}\\s{1}[0-2]{1}\\d{1}[:]{1}[0-5]{2}")) {
-                        if (Integer.valueOf(inventoryAddRetire.getText().substring(11, 12)) < 25) {
-                            item.setID(Integer.valueOf(inventoryAddID.getText()));
-                            item.setType(inventoryAddType.getText());
-                            item.setRetireDate(inventoryAddRetire.getText());
-                            item.setPrice(Double.valueOf(inventoryAddPrice.getText()));
-                            inventoryObservableList.add(item);
-                            filteredInventoryList.add(item);
-                            InventoryTableDAO.insert(item);
-                        }
+                    if (inventoryAddRetire.getText().matches("\\d{4}[-]{1}\\d{2}[-]{1}\\d{2}")) {
+                        item.setID(Integer.valueOf(inventoryAddID.getText()));
+                        item.setType(inventoryAddType.getText());
+                        item.setRetireDate(inventoryAddRetire.getText());
+                        item.setPrice(Double.valueOf(inventoryAddPrice.getText()));
+                        inventoryObservableList.add(item);
+                        InventoryTableDAO.insert(item);
+                        filteredListSource.add(item);
                     }
                 }
             }
         });
         deleteItem.setOnAction(e -> {
             Item temp = viewInventoryTable.getSelectionModel().getSelectedItem();
-            filteredInventoryList.remove(temp);
+            filteredListSource.remove(temp);
             inventoryObservableList.remove(temp);
             InventoryTableDAO.delete(temp.getID());
         });
@@ -131,14 +124,14 @@ public class ViewInventoryController implements Initializable {
             inventoryObservableList.setAll(filteredInventoryList);
         }));
 
-        DoubleStringConverter priceConv = new DoubleStringConverter();
+        DoubleStringConverter priceConverter = new DoubleStringConverter();
 
-        inventoryIDColumn.setCellFactory(new PropertyValueFactory("ID"));
-        inventoryTypeColumn.setCellFactory(new PropertyValueFactory("type"));
-        inventoryRetireColumn.setCellFactory(new PropertyValueFactory("retireDate"));
-//        inventoryPriceColumn.setCellFactory(new PropertyValueFactory("price"));
+        inventoryIDColumn.setCellValueFactory(new PropertyValueFactory("ID"));
+        inventoryTypeColumn.setCellValueFactory(new PropertyValueFactory("type"));
+        inventoryRetireColumn.setCellValueFactory(new PropertyValueFactory("retireDate"));
+        inventoryPriceColumn.setCellValueFactory(new PropertyValueFactory("price"));
 
-        if (rockWallManagementApp.getAccessLevel() == MANAGER || rockWallManagementApp.getAccessLevel() == ADMINISTRATOR) {
+        if (rockWallManagementApp.getAccessLevel() == RockWallManagementApp.Role.MANAGER || rockWallManagementApp.getAccessLevel() == RockWallManagementApp.Role.ADMINISTRATOR) {
             inventoryTypeColumn.setCellFactory(TextFieldTableCell.forTableColumn());
             inventoryTypeColumn.setOnEditCommit((TableColumn.CellEditEvent<Item, String> event) -> {
                 Item temp = event.getTableView().getItems().get(event.getTablePosition().getRow());
@@ -155,13 +148,13 @@ public class ViewInventoryController implements Initializable {
                 InventoryTableDAO.update(temp);
             });
 
-//            inventoryPriceColumn.setCellFactory(TextFieldTableCell.forTableColumn(priceConv));
-//            inventoryPriceColumn.setOnEditCommit((TableColumn.CellEditEvent<Item, Double> event) -> {
-//                Item temp = event.getTableView().getItems().get(event.getTablePosition().getRow());
-//                temp.setPrice(event.getNewValue());
-//                event.getTableView().getItems().set(event.getTablePosition().getRow(), temp);
-//                InventoryTableDAO.update(temp);
-//            });
+            inventoryPriceColumn.setCellFactory(TextFieldTableCell.forTableColumn(priceConverter));
+            inventoryPriceColumn.setOnEditCommit((TableColumn.CellEditEvent<Item, Double> event) -> {
+                Item temp = event.getTableView().getItems().get(event.getTablePosition().getRow());
+                temp.setPrice(event.getNewValue());
+                event.getTableView().getItems().set(event.getTablePosition().getRow(), temp);
+                InventoryTableDAO.update(temp);
+            });
         }
 
         viewInventoryTable.setItems(inventoryObservableList);
@@ -171,12 +164,12 @@ public class ViewInventoryController implements Initializable {
         boolean id;
         boolean type;
         boolean retireDate;
-//        boolean price;
+        boolean price;
 
         id = inventoryIDField.getText().isEmpty() || Integer.toString(item.getID()).contains(inventoryIDField.getText());
         type = inventoryTypeField.getText().isEmpty() || item.getType().toLowerCase().contains(inventoryTypeField.getText().toLowerCase());
         retireDate = inventoryRetireField.getText().isEmpty() || item.getRetireDate().toLowerCase().contains(inventoryRetireField.getText().toLowerCase());
-//        price = inventoryPriceField.getText().isEmpty() || item.getPrice().toString().contains(inventoryPriceField.getText());
+        price = inventoryPriceField.getText().isEmpty() || item.getPrice().toString().contains(inventoryPriceField.getText());
 
         return id && type && retireDate;
     }

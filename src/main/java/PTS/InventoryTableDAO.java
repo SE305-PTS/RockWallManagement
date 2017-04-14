@@ -100,7 +100,7 @@ public class InventoryTableDAO {
         return observable;
     }
 
-    public static ObservableList<Item> select(String id, String type, String price, String retiredate, String comments) {
+    public static ObservableList<Item> select(String id, String type, String price, String retiredate) {
         String query = "SELECT id,type,price,retiredate FROM Inventory WHERE";
         if(id != null) query = query + " id=" + id + " and";
         if(type != null) query = query + " type=\"" + type + "\" and";

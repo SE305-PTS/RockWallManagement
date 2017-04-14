@@ -10,6 +10,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.text.Text;
 import javafx.util.converter.BooleanStringConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -22,7 +24,9 @@ import static PTS.RockWallManagementApp.Role.MANAGER;
 
 public class ViewPatronsController implements Initializable {
     private ObservableList<Patron> patronObservableList = FXCollections.observableArrayList();
-    private FilteredList<Patron> filteredPatronList = new FilteredList<Patron>(select(), p -> true);
+    private ObservableList<Patron> filteredListSource = select();
+    private FilteredList<Patron> filteredPatronList = new FilteredList<Patron>(filteredListSource, p -> true);
+
 
     @FXML public MenuItem viewPatronsExit;
     @FXML public Text viewPatronsTitle;
@@ -60,7 +64,7 @@ public class ViewPatronsController implements Initializable {
         initTableView();
         deletePatron.setOnAction(e -> {
             Patron temp = viewPatronsTable.getSelectionModel().getSelectedItem();
-            filteredPatronList.remove(temp);
+            filteredListSource.remove(temp);
             patronObservableList.remove(temp);
             PatronTableDAO.delete(temp.getID());
         });

@@ -99,7 +99,7 @@
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <TableView fx:id="viewInventoryTable">
+                  <TableView fx:id="viewInventoryTable" editable="true">
                     <columns>
                       <TableColumn fx:id="inventoryIDColumn" prefWidth="178.0" text="ID" />
                       <TableColumn fx:id="inventoryTypeColumn" minWidth="0.0" prefWidth="214.0" text="Type" />
