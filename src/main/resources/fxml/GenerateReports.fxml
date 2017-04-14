@@ -7,7 +7,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PTS.GenerateReportsController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -59,11 +58,6 @@
                               <Insets />
                            </HBox.margin>
                         </RadioButton>
-                        <RadioButton fx:id="reportIncidents" layoutX="701.0" layoutY="20.0" mnemonicParsing="false" text="Incidents" toggleGroup="$ReportType">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </RadioButton>
                      </children>
                   </HBox>
                   <Text layoutX="20.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filters">
@@ -80,7 +74,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Text>
-                              <TextField fx:id="reportStartField" />
+                              <TextField fx:id="reportStartDate" />
                            </children>
                            <HBox.margin>
                               <Insets />
@@ -93,7 +87,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Text>
-                              <TextField fx:id="reportEndField" />
+                              <TextField fx:id="reportEndDate" />
                            </children>
                            <HBox.margin>
                               <Insets />
@@ -106,7 +100,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Text>
-                              <TextField />
+                              <TextField fx:id="reportName" />
                            </children>
                            <HBox.margin>
                               <Insets />
@@ -119,7 +113,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Text>
-                              <TextField fx:id="reportIDField" />
+                              <TextField fx:id="reportID" />
                            </children>
                            <HBox.margin>
                               <Insets />
@@ -173,39 +167,12 @@
                               <RadioButton fx:id="reportSuspendedNo" mnemonicParsing="false" text="No" toggleGroup="$Suspended" />
                            </children>
                         </VBox>
-                        <VBox layoutX="130.0" layoutY="20.0" spacing="8.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notes">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </Text>
-                              <TextField fx:id="reportNotesField" />
-                           </children>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </VBox>
                      </children>
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </HBox>
-                  <HBox layoutX="20.0" layoutY="77.0" spacing="12.0">
-                     <children>
-                        <Button fx:id="reportGenerateButton" mnemonicParsing="false" text="Generate Report">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="reportExportButton" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" text="Export Report" />
-                     </children>
-                  </HBox>
-                  <Text layoutX="10.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
+                  <Button fx:id="reportGenerateButton" mnemonicParsing="false" text="Generate Report" />
                </children>
                <padding>
                   <Insets bottom="20.0" left="12.0" right="12.0" top="20.0" />

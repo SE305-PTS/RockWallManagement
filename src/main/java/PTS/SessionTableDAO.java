@@ -102,7 +102,7 @@ public class SessionTableDAO {
     }
 
     public static ObservableList<Session> select(String id, String memberid, String checkin, String checkout) {
-        String query = "SELECT iid,memberid,checkin,checkout FROM Session WHERE";
+        String query = "SELECT id,memberid,checkin,checkout FROM Session WHERE";
         if(id != null) query = query + " id=" + id + " and";
         if(memberid != null) query = query + " memberid=" + memberid + " and";
         if(checkin != null) query = query + " checkin=\"" + checkin + "\" and";
@@ -131,8 +131,8 @@ public class SessionTableDAO {
         return observable;
     }
 
-    public static Session getByID(int id) {
-        String query = "SELECT id,memberid,checkin,checkout FROM Session WHERE id = ?";
+    public static Session getByMemberID(int id) {
+        String query = "SELECT id,memberid,checkin,checkout FROM Session WHERE memberid = ?";
         Session current = new Session();
         try {
             Connection conn = DriverManager.getConnection(DBInterface.getUrl());

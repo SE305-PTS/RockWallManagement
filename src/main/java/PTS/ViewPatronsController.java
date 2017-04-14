@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static PTS.PatronTableDAO.selectAll;
+import static PTS.PatronTableDAO.select;
 import static PTS.RockWallManagementApp.Role.ADMINISTRATOR;
 import static PTS.RockWallManagementApp.Role.MANAGER;
 
@@ -49,6 +49,7 @@ public class ViewPatronsController implements Initializable {
     @FXML public CheckBox patronSubscriberYes;
     @FXML public CheckBox patronSubscriberNo;
     @FXML public Button deletePatron;
+    @FXML public Button patronExport;
 
     private RockWallManagementApp rockWallManagementApp;
 
@@ -85,11 +86,14 @@ public class ViewPatronsController implements Initializable {
         viewPatronsExit.setOnAction(e -> {
             rockWallManagementApp.showMainPage();
         });
+        patronExport.setOnAction(e -> {
+            Reports.patronReport(patronObservableList);
+        });
     }
 
     private void initTableView() {
 
-        FilteredList<Patron> filteredPatronList = new FilteredList<Patron>(selectAll(), p -> true);
+        FilteredList<Patron> filteredPatronList = new FilteredList<Patron>(select(), p -> true);
 
         patronObservableList.setAll(filteredPatronList);
 
