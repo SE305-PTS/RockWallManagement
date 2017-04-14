@@ -16,7 +16,7 @@ public class RockWallManagementApp extends Application {
         EMPLOYEE, MANAGER, ADMINISTRATOR
     }
 
-    private Role accessLevel = Role.ADMINISTRATOR;
+    private Role accessLevel = Role.EMPLOYEE;
 
     public Role getAccessLevel() {
         return accessLevel;

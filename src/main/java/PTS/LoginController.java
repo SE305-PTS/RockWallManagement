@@ -29,9 +29,9 @@ public class LoginController implements Initializable {
                     Account account = AccountTableDAO.getByUsername(loginUsername.getText());
                     if (account != null) {
                         if (Objects.equals(account.getPassword(), loginPassword.getText())) {
-                            if (Objects.equals(account.getType(), "Administrator")) {
+                            if (Objects.equals(account.getType(), "A")) {
                                 rockWallManagementApp.setAccessLevel(RockWallManagementApp.Role.ADMINISTRATOR);
-                            } else if (Objects.equals(account.getType(), "Manager")) {
+                            } else if (Objects.equals(account.getType(), "M")) {
                                 rockWallManagementApp.setAccessLevel(RockWallManagementApp.Role.MANAGER);
                             }
                         }

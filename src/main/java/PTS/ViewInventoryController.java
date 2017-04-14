@@ -45,9 +45,8 @@ public class ViewInventoryController implements Initializable {
     public void setRockWallManagementApp(RockWallManagementApp app) {
         rockWallManagementApp = app;
         changeAccessView(rockWallManagementApp.getAccessLevel());
-        viewInventoryExit.setOnAction(e -> {
-            rockWallManagementApp.showMainPage();
-        });
+        viewInventoryExit.setOnAction(e -> rockWallManagementApp.showMainPage());
+        inventoryExport.setOnAction(e -> Reports.inventoryReport(inventoryObservableList));
         inventoryAddButton.setOnAction(e -> {
             Item item = new Item();
             if (!(inventoryAddID.getText().isEmpty() || inventoryAddType.getText().isEmpty() || inventoryAddRetire.getText().isEmpty() || inventoryAddPrice.getText().isEmpty())) {
@@ -60,6 +59,10 @@ public class ViewInventoryController implements Initializable {
                         inventoryObservableList.add(item);
                         InventoryTableDAO.insert(item);
                         filteredListSource.add(item);
+                        inventoryIDField.setText("");
+                        inventoryPriceField.setText("");
+                        inventoryRetireField.setText("");
+                        inventoryTypeField.setText("");
                     }
                 }
             }
@@ -171,7 +174,7 @@ public class ViewInventoryController implements Initializable {
         retireDate = inventoryRetireField.getText().isEmpty() || item.getRetireDate().toLowerCase().contains(inventoryRetireField.getText().toLowerCase());
         price = inventoryPriceField.getText().isEmpty() || item.getPrice().toString().contains(inventoryPriceField.getText());
 
-        return id && type && retireDate;
+        return id && type && retireDate && price;
     }
 
 }

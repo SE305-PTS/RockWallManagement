@@ -6,8 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PTS.EditManagerController">
+<AnchorPane prefHeight="800.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PTS.EditManagerController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -15,7 +14,10 @@
               <items>
                   <VBox alignment="CENTER" layoutX="20.0" layoutY="65.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Manager's Data" wrappingWidth="120.21875" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Manager" wrappingWidth="183.21875">
+                           <font>
+                              <Font size="24.0" />
+                           </font></Text>
                         <GridPane hgap="12.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="271.0" vgap="20.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="102.0" />
@@ -51,9 +53,22 @@
                               <TextField fx:id="editManagerFirstName" GridPane.columnIndex="1" />
                               <TextField fx:id="editManagerLastName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <TextField fx:id="editManagerUsername" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField fx:id="editManagerPassword" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="editManagerPassword" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                            </children>
+                           <VBox.margin>
+                              <Insets right="80.0" />
+                           </VBox.margin>
                         </GridPane>
+                        <HBox alignment="TOP_CENTER" spacing="12.0">
+                           <children>
+                              <RadioButton fx:id="editManagerTypeManager" mnemonicParsing="false" selected="true" text="Manager">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="editManagerType" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="editManagerTypeAdministrator" mnemonicParsing="false" text="Administrator" toggleGroup="$editManagerType" />
+                           </children>
+                        </HBox>
                         <Button fx:id="editManagerSubmit" layoutX="91.0" layoutY="318.0" mnemonicParsing="false" text="Add Manager" />
                      </children>
                   </VBox>
@@ -63,14 +78,23 @@
                            <VBox.margin>
                               <Insets top="12.0" />
                            </VBox.margin>
+                           <font>
+                              <Font size="24.0" />
+                           </font>
                         </Text>
-                        <TableView fx:id="editManagerTable" layoutX="67.0" layoutY="78.0">
+                        <TableView fx:id="editManagerTable" editable="true" layoutX="67.0" layoutY="78.0">
                           <columns>
-                            <TableColumn prefWidth="114.0" text="First Name" />
-                              <TableColumn prefWidth="105.0" text="Last Name" />
-                            <TableColumn prefWidth="113.0" text="Option" />
+                            <TableColumn fx:id="managerFirstNameColumn" prefWidth="163.0" text="First Name" />
+                              <TableColumn fx:id="managerLastNameColumn" prefWidth="163.0" text="Last Name" />
+                            <TableColumn fx:id="managerUsernameColumn" prefWidth="163.0" text="Username" />
+                              <TableColumn fx:id="managerTypeColumn" prefWidth="161.0" text="Type" />
                           </columns>
                         </TableView>
+                        <HBox alignment="TOP_CENTER" spacing="12.0">
+                           <children>
+                              <Button fx:id="editManagerDelete" mnemonicParsing="false" text="Delete Selected Manager" />
+                           </children>
+                        </HBox>
                      </children>
                      <padding>
                         <Insets left="12.0" right="12.0" />

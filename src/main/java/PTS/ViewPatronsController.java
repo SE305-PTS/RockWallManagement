@@ -75,26 +75,25 @@ public class ViewPatronsController implements Initializable {
             case EMPLOYEE:
                 viewPatronsTitle.setText("View Patrons");
                 deletePatron.setVisible(false);
+                patronExport.setVisible(false);
                 break;
             case MANAGER:
                 viewPatronsTitle.setText("View/Edit Patrons");
                 deletePatron.setVisible(true);
+                patronExport.setVisible(true);
                 break;
             case ADMINISTRATOR:
                 viewPatronsTitle.setText("View/Edit Patrons");
                 deletePatron.setVisible(true);
+                patronExport.setVisible(true);
                 break;
         }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        viewPatronsExit.setOnAction(e -> {
-            rockWallManagementApp.showMainPage();
-        });
-        patronExport.setOnAction(e -> {
-            Reports.patronReport(patronObservableList);
-        });
+        viewPatronsExit.setOnAction(e -> rockWallManagementApp.showMainPage());
+        patronExport.setOnAction(e -> Reports.patronReport(patronObservableList));
     }
 
     private void initTableView() {
