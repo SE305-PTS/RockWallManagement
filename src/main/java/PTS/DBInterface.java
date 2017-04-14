@@ -52,9 +52,9 @@ public class DBInterface {
         return path;
     }
 
-    public static Path getExportPath() throws IOException {
+    public static Path getExportPath(String filename) throws IOException {
         Path path;
-        path = Paths.get(System.getProperty("user.home"), "Desktop", appDirName);
+        path = Paths.get(System.getProperty("user.home"), "Desktop", appDirName, filename);
         return path;
     }
 }

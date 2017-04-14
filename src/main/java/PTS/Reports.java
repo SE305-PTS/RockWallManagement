@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -15,9 +14,10 @@ import java.util.List;
 public class Reports {
     private static final Logger log = LoggerFactory.getLogger(Reports.class);
 
-    public static void writeFile(Path dir, String contents) {
+    public static void writeFile(String filename, String contents) {
         try {
-            BufferedWriter writer = Files.newBufferedWriter(dir, Charset.defaultCharset());
+            Path file = DBInterface.getExportPath(filename);
+            BufferedWriter writer = Files.newBufferedWriter(file, Charset.defaultCharset());
             writer.write(contents);
             writer.close();
         }
@@ -35,12 +35,7 @@ public class Reports {
         for(String i : lines) {
             contents.append(i);
         }
-        try {
-            writeFile(DBInterface.getExportPath(), contents.toString());
-        }
-        catch(IOException e) {
-            log.error("Could not export Patron file: ", e);
-        }
+        writeFile("Patron.csv", contents.toString());
     }
 
     public static void inventoryReport(List<Item> items) {
@@ -52,11 +47,6 @@ public class Reports {
         for(String i : lines) {
             contents.append(i);
         }
-        try {
-            writeFile(DBInterface.getExportPath(), contents.toString());
-        }
-        catch(IOException e) {
-            log.error("Could not export Inventory file: ", e);
-        }
+        writeFile("Inventory.csv", contents.toString());
     }
 }
