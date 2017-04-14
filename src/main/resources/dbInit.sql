@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS Session (
 CREATE TABLE IF NOT EXISTS Inventory (
   id INTEGER PRIMARY KEY,
   type VARCHAR(80) NOT NULL,
-  purchasedate DATE NOT NULL,
+  price NUMERIC NOT NULL,
   retiredate DATE NOT NULL,
   comments VARCHAR(80)
 );

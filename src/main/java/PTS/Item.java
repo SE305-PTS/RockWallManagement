@@ -5,21 +5,21 @@ public class Item {
     private int ID;
     private String type;
     private String retireDate;
-    private String purchaseDate;
+    private Double price;
     private String notes;
 
     Item() {
         this.type = null;
         this.retireDate = null;
-        this.purchaseDate = null;
+        this.price = null;
         this.notes = null;
     }
 
-    Item(int ID, String type, String retireDate, String purchaseDate, String notes) {
+    Item(int ID, String type, String retireDate, Double price, String notes) {
         this.ID = ID;
         this.type = type;
         this.retireDate = retireDate;
-        this.purchaseDate = purchaseDate;
+        this.price = price;
         this.notes = notes;
     }
 
@@ -47,12 +47,12 @@ public class Item {
         this.retireDate = retireDate;
     }
 
-    public String getPurchaseDate() {
-        return purchaseDate;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setPurchaseDate(String purchaseDate) {
-        this.purchaseDate = purchaseDate;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public String getNotes() {
