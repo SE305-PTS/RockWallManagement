@@ -39,7 +39,6 @@ public class DBInterface {
         } catch (URISyntaxException | IOException | SQLException e) {
             log.error("Failed to initialize database file", e);
         }
-        /*TODO Remove when done testing*/test();
     }
 
     public static Path getDataPath() throws IOException {
@@ -56,20 +55,5 @@ public class DBInterface {
             Files.createDirectories(path);
         }
         return path;
-    }
-
-    /*TODO Remove when done testing*/private static void test() {
-        Patron pat = new Patron(7336666, "Mitchell", "Petit", "M", "mitchell.petit@jacks.sdstate.edu", false);
-        pat.setSuspended("2017-10-09 12:24:32");
-        PatronTableDAO.insert(pat);
-        pat = new Patron(7336667, "Test", "Test", "F", null, false);
-        PatronTableDAO.insert(pat);
-        pat.setFirstName("Test2");
-        pat.setLastName("Test2");
-        pat.setGender("M");
-        PatronTableDAO.update(pat);
-        PatronTableDAO.selectAll();
-//        PatronTableDAO.delete(7336666);
-        ObservableList<Patron> list = PatronTableDAO.selectAll();
     }
 }
