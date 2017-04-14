@@ -1,22 +1,18 @@
 package PTS;
 
-import javafx.collections.ObservableList;
-import org.apache.commons.dbcp2.BasicDataSource;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.SystemUtils;
-import org.apache.commons.logging.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.ConnectException;
-import java.sql.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DBInterface {
     private static final Logger log = LoggerFactory.getLogger(DBInterface.class);
@@ -32,7 +28,6 @@ public class DBInterface {
             url = "jdbc:sqlite:" + Paths.get(getDataPath().toString(), "rockwall.db").toString();
             String sql = new String(Files.readAllBytes(Paths.get(DBInterface.class.getResource("/dbInit.sql").toURI())));
             Connection conn = DriverManager.getConnection(url);
-            conn.setAutoCommit(true);
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(sql);
             stmt.closeOnCompletion();
@@ -54,6 +49,12 @@ public class DBInterface {
             log.info("Path: '{}' does not exist, creating.", path);
             Files.createDirectories(path);
         }
+        return path;
+    }
+
+    public static Path getExportPath() throws IOException {
+        Path path;
+        path = Paths.get(System.getProperty("user.home"), "Desktop", appDirName);
         return path;
     }
 }

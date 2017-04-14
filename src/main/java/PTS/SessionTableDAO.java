@@ -131,8 +131,8 @@ public class SessionTableDAO {
         return observable;
     }
 
-    public static Session getByMemberID(int id) {
-        String query = "SELECT id,memberid,checkin,checkout FROM Session WHERE memberid = ?";
+    public static Session getLatestByMemberID(int id) {
+        String query = "SELECT id,memberid,checkin,checkout FROM Session WHERE memberid = ? and checkout IS NULL";
         Session current = new Session();
         try {
             Connection conn = DriverManager.getConnection(DBInterface.getUrl());
@@ -151,5 +151,23 @@ public class SessionTableDAO {
             log.error("Could not find Session in Database: ", e);
         }
         return current;
+    }
+
+    public static int getMaxID() {
+        String query = "SELECT MAX(id) AS maxid FROM SESSION";
+        int max = 0;
+        try {
+            Connection conn = DriverManager.getConnection(DBInterface.getUrl());
+            PreparedStatement stmt = conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                max = rs.getInt("maxid");
+            }
+            stmt.closeOnCompletion();
+            rs.close();
+        } catch (SQLException e) {
+            log.error("Could not find Session in Database: ", e);
+        }
+        return max;
     }
 }

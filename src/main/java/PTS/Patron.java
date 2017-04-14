@@ -117,4 +117,11 @@ public class Patron {
     public void setSuspended(String suspended) {
         this.suspended = suspended;
     }
+
+    public String toString() {
+        String str = Integer.toString(ID)+","+firstName+","+lastName+","+gender+","+emailAddress+",";
+        str = str+Boolean.toString(emailOptIn)+","+Boolean.toString(belayCertified)+","+Boolean.toString(leadCertified)+",";
+        str = str+suspended+"\n";
+        return str;
+    }
 }
