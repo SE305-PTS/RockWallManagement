@@ -35,7 +35,7 @@ public class InventoryTableDAO {
     }
 
     public static void delete(int id) {
-        String query = "DELETE FROM Item WHERE id = ?";
+        String query = "DELETE FROM Inventory WHERE id = ?";
         try {
             Connection conn = DriverManager.getConnection(DBInterface.getUrl());
             PreparedStatement stmt = conn.prepareStatement(query);
@@ -76,7 +76,7 @@ public class InventoryTableDAO {
     }
 
     public static ObservableList<Item> select() {
-        String query = "SELECT id,type,price,retiredate FROM Item";
+        String query = "SELECT id,type,price,retiredate FROM Inventory";
         List<Item> list = new ArrayList<>();
         ObservableList<Item> observable;
         try {
@@ -101,7 +101,7 @@ public class InventoryTableDAO {
     }
 
     public static ObservableList<Item> select(String id, String type, String price, String retiredate, String comments) {
-        String query = "SELECT id,type,price,retiredate FROM Item WHERE";
+        String query = "SELECT id,type,price,retiredate FROM Inventory WHERE";
         if(id != null) query = query + " id=" + id + " and";
         if(type != null) query = query + " type=\"" + type + "\" and";
         if(price != null) query = query + " price=" + price + " and";
@@ -128,5 +128,27 @@ public class InventoryTableDAO {
         }
         observable = FXCollections.observableArrayList(list);
         return observable;
+    }
+
+    public static Item getByID(int id) {
+        String query = "SELECT id,type,price,retiredate FROM Inventory WHERE id = ?";
+        Item current = new Item();
+        try {
+            Connection conn = DriverManager.getConnection(DBInterface.getUrl());
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                current.setID(rs.getInt("id"));
+                current.setType(rs.getString("type"));
+                current.setPrice(rs.getDouble("price"));
+                current.setRetireDate(rs.getString("retiredate"));
+            }
+            stmt.closeOnCompletion();
+            rs.close();
+        } catch (SQLException e) {
+            log.error("Could not find Patron in Database", e);
+        }
+        return current;
     }
 }
