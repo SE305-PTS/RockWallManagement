@@ -6,21 +6,18 @@ public class Item {
     private String type;
     private String retireDate;
     private Double price;
-    private String notes;
 
     Item() {
         this.type = null;
         this.retireDate = null;
         this.price = null;
-        this.notes = null;
     }
 
-    Item(int ID, String type, String retireDate, Double price, String notes) {
+    Item(int ID, String type, String retireDate, Double price) {
         this.ID = ID;
         this.type = type;
         this.retireDate = retireDate;
         this.price = price;
-        this.notes = notes;
     }
 
     public int getID() {
@@ -53,13 +50,5 @@ public class Item {
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
     }
 }

@@ -13,7 +13,7 @@ public class InventoryTableDAO {
     private static final Logger log = LoggerFactory.getLogger(InventoryTableDAO.class);
 
     public static void insert(Item item) {
-        String query = "INSERT INTO Inventory(id,type,price,retiredate,comments) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO Inventory(id,type,price,retiredate) VALUES (?,?,?,?)";
         try {
             Connection conn = DriverManager.getConnection(DBInterface.getUrl());
             PreparedStatement stmt = conn.prepareStatement(query);
@@ -21,7 +21,6 @@ public class InventoryTableDAO {
             stmt.setString(2, item.getType());
             stmt.setDouble(3, item.getPrice());
             stmt.setString(4, item.getRetireDate());
-            stmt.setString(5, item.getNotes());
             stmt.executeUpdate();
             stmt.closeOnCompletion();
         } catch (SQLException e) {
@@ -55,15 +54,14 @@ public class InventoryTableDAO {
     }
 
     public static void update(Item item) {
-        String query = "UPDATE Inventory Set type = ?, price = ?, retiredate = ?, comments = ? WHERE id = ?";
+        String query = "UPDATE Inventory Set type = ?, price = ?, retiredate = ? WHERE id = ?";
         try {
             Connection conn = DriverManager.getConnection(DBInterface.getUrl());
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, item.getType());
             stmt.setDouble(2, item.getPrice());
             stmt.setString(3, item.getRetireDate());
-            stmt.setString(4, item.getNotes());
-            stmt.setInt(5, item.getID());
+            stmt.setInt(4, item.getID());
             stmt.executeUpdate();
             stmt.closeOnCompletion();
         } catch (SQLException e) {
@@ -78,7 +76,7 @@ public class InventoryTableDAO {
     }
 
     public static ObservableList<Item> select() {
-        String query = "SELECT id,type,price,retiredate,comments FROM Item";
+        String query = "SELECT id,type,price,retiredate FROM Item";
         List<Item> list = new ArrayList<>();
         ObservableList<Item> observable;
         try {
@@ -91,7 +89,6 @@ public class InventoryTableDAO {
                 current.setType(rs.getString("type"));
                 current.setPrice(rs.getDouble("price"));
                 current.setRetireDate(rs.getString("retiredate"));
-                current.setNotes(rs.getString("comments"));
                 list.add(current);
             }
             stmt.closeOnCompletion();
@@ -104,13 +101,12 @@ public class InventoryTableDAO {
     }
 
     public static ObservableList<Item> select(String id, String type, String price, String retiredate, String comments) {
-        String query = "SELECT id,type,price,retiredate,comments FROM Item WHERE";
+        String query = "SELECT id,type,price,retiredate FROM Item WHERE";
         if(id != null) query = query + " id=" + id + " and";
         if(type != null) query = query + " type=\"" + type + "\" and";
         if(price != null) query = query + " price=" + price + " and";
         if(retiredate != null) query = query + " retiredate=\"" + retiredate + "\" and";
-        if(comments != null) query = query + " comments=\"" + comments + "\" and";
-        else query = query = query + " (comments IS NULL or comments IS NOT NULL)";
+        else query = query + " (retiredate IS NULL or retiredate IS NOT NULL)";
         List<Item> list = new ArrayList<>();
         ObservableList<Item> observable;
         try {
@@ -123,7 +119,6 @@ public class InventoryTableDAO {
                 current.setType(rs.getString("type"));
                 current.setPrice(rs.getDouble("price"));
                 current.setRetireDate(rs.getString("retiredate"));
-                current.setNotes(rs.getString("comments"));
                 list.add(current);
             }
             stmt.closeOnCompletion();

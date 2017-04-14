@@ -21,7 +21,6 @@ CREATE TABLE IF NOT EXISTS Inventory (
   type VARCHAR(80) NOT NULL,
   price NUMERIC NOT NULL,
   retiredate DATE NOT NULL,
-  comments VARCHAR(80)
 );
 CREATE TABLE IF NOT EXISTS Account (
   username VARCHAR(30) PRIMARY KEY,
