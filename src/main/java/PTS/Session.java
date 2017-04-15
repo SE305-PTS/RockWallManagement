@@ -49,4 +49,12 @@ public class Session {
     public void setCheckOut(String checkOut) {
         this.checkOut = checkOut;
     }
+
+    public String toString() {
+        return Integer.toString(sessionID)+","+Integer.toString(patronID)+","+checkIn+","+checkOut+"\n";
+    }
+
+    public String toStringNoPatron() {
+        return Integer.toString(sessionID)+","+checkIn+","+checkOut+",";
+    }
 }

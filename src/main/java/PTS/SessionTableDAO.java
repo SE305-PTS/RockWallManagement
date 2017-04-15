@@ -170,4 +170,32 @@ public class SessionTableDAO {
         }
         return max;
     }
+
+    public static ArrayList<Session> selectByDate(String checkin, String checkout) {
+        String query = "SELECT id,memberid,checkin,checkout FROM Session";
+        query = query + " WHERE checkin >= ? and checkin <= ? and checkout >= ? and checkout <= ?";
+        ArrayList<Session> list = new ArrayList<>();
+        try {
+            Connection conn = DriverManager.getConnection(DBInterface.getUrl());
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, checkin);
+            stmt.setString(2, checkout);
+            stmt.setString(3, checkin);
+            stmt.setString(4, checkout);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                Session current = new Session();
+                current.setSessionID(rs.getInt("id"));
+                current.setPatronID(rs.getInt("memberid"));
+                current.setCheckIn(rs.getString("checkin"));
+                current.setCheckOut(rs.getString("checkout"));
+                list.add(current);
+            }
+            stmt.closeOnCompletion();
+            rs.close();
+        } catch (SQLException e) {
+            log.error("Could not select from Session: ", e);
+        }
+        return list;
+    }
 }

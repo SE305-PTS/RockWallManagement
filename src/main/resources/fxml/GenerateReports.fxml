@@ -26,45 +26,13 @@
                <children>
                   <HBox alignment="CENTER">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Generate Reports">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Generate Session Reports">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Text>
                      </children>
                   </HBox>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <HBox layoutX="20.0" layoutY="177.0" spacing="30.0">
-                     <children>
-                        <RadioButton fx:id="reportCheckIns" mnemonicParsing="false" text="Check Ins">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                           <toggleGroup>
-                              <ToggleGroup fx:id="ReportType" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <RadioButton fx:id="reportCertifications" layoutX="10.0" layoutY="20.0" mnemonicParsing="false" text="Certifications" toggleGroup="$ReportType">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </RadioButton>
-                        <RadioButton fx:id="reportSuspensions" layoutX="10.0" layoutY="20.0" mnemonicParsing="false" text="Suspensions" toggleGroup="$ReportType">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </RadioButton>
-                     </children>
-                  </HBox>
-                  <Text layoutX="20.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filters">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
                   <HBox spacing="12.0">
                      <children>
                         <VBox spacing="8.0">
@@ -92,80 +60,6 @@
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
-                        </VBox>
-                        <VBox fx:id="reportNameField" layoutX="230.0" layoutY="20.0" spacing="8.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </Text>
-                              <TextField fx:id="reportName" />
-                           </children>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </VBox>
-                        <VBox layoutX="20.0" layoutY="20.0" spacing="8.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </Text>
-                              <TextField fx:id="reportID" />
-                           </children>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </VBox>
-                        <VBox layoutX="130.0" layoutY="20.0" spacing="8.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Belay Certified">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </Text>
-                              <RadioButton fx:id="reportBelayYes" mnemonicParsing="false" text="Yes">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="BelayCertified" />
-                                 </toggleGroup>
-                              </RadioButton>
-                              <RadioButton fx:id="reportBelayNo" mnemonicParsing="false" text="No" toggleGroup="$BelayCertified" />
-                           </children>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </VBox>
-                        <VBox layoutX="350.0" layoutY="20.0" spacing="8.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lead Certified">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </Text>
-                              <RadioButton fx:id="reportLeadYes" mnemonicParsing="false" text="Yes">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="LeadCertified" />
-                                 </toggleGroup>
-                              </RadioButton>
-                              <RadioButton fx:id="reportLeadNo" mnemonicParsing="false" text="No" toggleGroup="$LeadCertified" />
-                           </children>
-                        </VBox>
-                        <VBox layoutX="350.0" layoutY="20.0" spacing="8.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Suspended">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </Text>
-                              <RadioButton fx:id="reportSuspendedYes" mnemonicParsing="false" text="Yes">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="Suspended" />
-                                 </toggleGroup>
-                              </RadioButton>
-                              <RadioButton fx:id="reportSuspendedNo" mnemonicParsing="false" text="No" toggleGroup="$Suspended" />
-                           </children>
                         </VBox>
                      </children>
                      <VBox.margin>
