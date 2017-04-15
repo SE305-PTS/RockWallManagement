@@ -36,7 +36,7 @@ public class Reports {
         for(String i : lines) {
             contents.append(i);
         }
-        writeFile("Patron.csv", contents.toString());
+        writeFile("Patron.csv", contents.toString().replaceAll("null", ""));
     }
 
     public static void inventoryReport(List<Item> items) {
@@ -49,6 +49,6 @@ public class Reports {
         for(String i : lines) {
             contents.append(i);
         }
-        writeFile("Inventory.csv", contents.toString());
+        writeFile("Inventory.csv", contents.toString().replaceAll("null", ""));
     }
 }
