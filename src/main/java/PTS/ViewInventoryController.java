@@ -101,6 +101,7 @@ public class ViewInventoryController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        inventoryExport.setOnAction(e -> Reports.inventoryReport(inventoryObservableList));
     }
 
     private void initTableView() {

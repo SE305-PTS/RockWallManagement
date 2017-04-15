@@ -53,8 +53,6 @@ public class DBInterface {
     }
 
     public static Path getExportPath(String filename) throws IOException {
-        Path path;
-        path = Paths.get(System.getProperty("user.home"), "Desktop", appDirName, filename);
-        return path;
+        return Paths.get(System.getProperty("user.home"), "Desktop", appDirName, filename);
     }
 }

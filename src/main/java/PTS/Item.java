@@ -51,4 +51,9 @@ public class Item {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    public String toString() {
+        String str = Integer.toString(ID)+","+type+","+retireDate+","+price.toString()+"\n";
+        return str;
+    }
 }

@@ -22,7 +22,7 @@ public class Reports {
             writer.close();
         }
         catch(IOException e) {
-            log.error("Could not write Export File: ", e);
+            log.error("Could not export"+filename+": ", e);
         }
     }
 
@@ -32,6 +32,7 @@ public class Reports {
         for(Patron i : patrons) {
             lines.add(i.toString());
         }
+        contents.append(" ID,First Name,Last Name,Gender,Email,Subscriber,Belay Certified,Lead Certified,Suspension\n");
         for(String i : lines) {
             contents.append(i);
         }
@@ -44,6 +45,7 @@ public class Reports {
         for(Item i : items) {
             lines.add(i.toString());
         }
+        contents.append(" ID,Type,Retire Date,Price\n");
         for(String i : lines) {
             contents.append(i);
         }
