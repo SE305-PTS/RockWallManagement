@@ -1,7 +1,5 @@
 package PTS;
 
-// use for timestamps: http://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -27,41 +25,48 @@ public class CheckInOutController implements Initializable {
         checkInOutSubmit.setOnAction(e -> {
             if (!checkInOutID.getText().isEmpty()) {
                 Patron patron = PatronTableDAO.getByID(Integer.parseInt(checkInOutID.getText()));
-                if (patron != null) {
-                    if (patron.getID() == Integer.parseInt(checkInOutID.getText())) {
-                        LocalDateTime time = LocalDateTime.now();
-                        String month;
-                        String day;
-                        String hour;
-                        String minute;
-                        if (time.getMonthValue() < 10) {
-                            month = "0" + time.getMonthValue();
-                        } else {
-                            month = "" + time.getMonthValue();
-                        }
-                        if (time.getDayOfMonth() < 10) {
-                            day = "0" + time.getDayOfMonth();
-                        } else {
-                            day = "" + time.getDayOfMonth();
-                        }
-                        if (time.getHour() < 10) {
-                            hour = "0" + time.getHour();
-                        } else {
-                            hour = "" + time.getHour();
-                        }
-                        if (time.getMinute() < 10) {
-                            minute = "0" + time.getMinute();
-                        } else {
-                            minute = "" + time.getMinute();
-                        }
-                        String timeStamp = "" + time.getYear() + "-" + month + "-" + day + " " + hour + ":" + minute;
-
-
-                        rockWallManagementApp.showMainPage();
+                if (patron.getID() == Integer.parseInt(checkInOutID.getText())) {
+                    LocalDateTime time = LocalDateTime.now();
+                    String month;
+                    String day;
+                    String hour;
+                    String minute;
+                    if (time.getMonthValue() < 10) {
+                        month = "0" + time.getMonthValue();
+                    } else {
+                        month = "" + time.getMonthValue();
                     }
-                }
-            } else {
+                    if (time.getDayOfMonth() < 10) {
+                        day = "0" + time.getDayOfMonth();
+                    } else {
+                        day = "" + time.getDayOfMonth();
+                    }
+                    if (time.getHour() < 10) {
+                        hour = "0" + time.getHour();
+                    } else {
+                        hour = "" + time.getHour();
+                    }
+                    if (time.getMinute() < 10) {
+                        minute = "0" + time.getMinute();
+                    } else {
+                        minute = "" + time.getMinute();
+                    }
+                    String timeStamp = "" + time.getYear() + "-" + month + "-" + day + " " + hour + ":" + minute;
 
+                    Session session = SessionTableDAO.getLatestByMemberID(patron.getID());
+
+                    if (session.getCheckIn() == null) {
+                        session.setCheckIn(timeStamp);
+                        session.setPatronID(Integer.parseInt(checkInOutID.getText()));
+                        session.setSessionID(SessionTableDAO.getMaxID() + 1);
+                        SessionTableDAO.insert(session);
+                    } else {
+                        session.setCheckOut(timeStamp);
+                        SessionTableDAO.update(session);
+                    }
+
+                    rockWallManagementApp.showMainPage();
+                }
             }
         });
     }

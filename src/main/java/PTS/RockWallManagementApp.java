@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class RockWallManagementApp extends Application {
 
     private Stage primaryStage;
@@ -31,6 +33,15 @@ public class RockWallManagementApp extends Application {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Rock Wall Management");
         DBInterface.init();
+        boolean adminExists = false;
+        for (Account a:AccountTableDAO.select()) {
+            if (Objects.equals(a.getType(), "A")) {
+                adminExists = true;
+            }
+        }
+        if (!adminExists) {
+            accessLevel = Role.ADMINISTRATOR;
+        }
         showMainPage();
     }
 
