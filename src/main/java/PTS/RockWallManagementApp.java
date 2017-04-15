@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class RockWallManagementApp extends Application {
@@ -33,15 +34,7 @@ public class RockWallManagementApp extends Application {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Rock Wall Management");
         DBInterface.init();
-        boolean adminExists = false;
-        for (Account a:AccountTableDAO.select()) {
-            if (Objects.equals(a.getType(), "A")) {
-                adminExists = true;
-            }
-        }
-        if (!adminExists) {
-            accessLevel = Role.ADMINISTRATOR;
-        }
+        setup();
         showMainPage();
     }
 
@@ -129,6 +122,43 @@ public class RockWallManagementApp extends Application {
             controller.setRockWallManagementApp(this);
             showPage(root);
         } catch (Exception e) {e.printStackTrace();}
+    }
+
+    private void setup() {
+
+        // if there are no admins in the database, logins in as admin to allowing creation of admin account
+        boolean adminExists = false;
+        for (Account a : AccountTableDAO.select()) {
+            if (Objects.equals(a.getType(), "A")) {
+                adminExists = true;
+            }
+        }
+        if (!adminExists) {
+            accessLevel = Role.ADMINISTRATOR;
+        }
+
+        // closes all sessions from previous day that were left open
+        LocalDateTime time = LocalDateTime.now();
+        String month;
+        String day;
+        if (time.getMonthValue() < 10) {
+            month = "0" + time.getMonthValue();
+        } else {
+            month = "" + time.getMonthValue();
+        }
+        if (time.getDayOfMonth() < 10) {
+            day = "0" + time.getDayOfMonth();
+        } else {
+            day = "" + time.getDayOfMonth();
+        }
+        String timeStamp = "" + time.getYear() + "-" + month + "-" + day;
+        for (Session s : SessionTableDAO.select()) {
+            if (s.getCheckOut() == null) {
+                if (s.getCheckIn().substring(0,9) == timeStamp) {
+                    s.setCheckOut(s.getCheckIn().substring(0, 10).concat("23:59"));
+                }
+            }
+        }
     }
 
     public static void main(String[] args) {
