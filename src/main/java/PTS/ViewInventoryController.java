@@ -102,6 +102,16 @@ public class ViewInventoryController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         inventoryExport.setOnAction(e -> Reports.inventoryReport(inventoryObservableList));
+        inventoryIDField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                inventoryIDField.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+        inventoryAddID.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                inventoryAddID.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
     }
 
     private void initTableView() {

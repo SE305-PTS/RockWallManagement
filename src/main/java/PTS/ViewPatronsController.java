@@ -10,8 +10,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.text.Text;
 import javafx.util.converter.BooleanStringConverter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -94,6 +92,11 @@ public class ViewPatronsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         viewPatronsExit.setOnAction(e -> rockWallManagementApp.showMainPage());
         patronExport.setOnAction(e -> Reports.patronReport(patronObservableList));
+        patronIDField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                patronIDField.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
     }
 
     private void initTableView() {
