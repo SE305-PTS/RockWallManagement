@@ -94,7 +94,7 @@ public class ViewPatronsController implements Initializable {
         patronExport.setOnAction(e -> Reports.patronReport(patronObservableList));
         patronIDField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
-                patronIDField.setText(newValue.replaceAll("[^\\d]", ""));
+                patronIDField.setText(oldValue);
             }
         });
     }

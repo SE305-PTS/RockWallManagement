@@ -57,7 +57,7 @@ public class SignWaiverController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         signWaiverID.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
-                signWaiverID.setText(newValue.replaceAll("[^\\d]", ""));
+                signWaiverID.setText(oldValue);
             }
         });
     }

@@ -59,10 +59,10 @@ public class ViewInventoryController implements Initializable {
                         inventoryObservableList.add(item);
                         InventoryTableDAO.insert(item);
                         filteredListSource.add(item);
-                        inventoryIDField.setText("");
-                        inventoryPriceField.setText("");
-                        inventoryRetireField.setText("");
-                        inventoryTypeField.setText("");
+                        inventoryAddID.setText("");
+                        inventoryAddPrice.setText("");
+                        inventoryAddRetire.setText("");
+                        inventoryAddType.setText("");
                     }
                 }
             }
@@ -104,12 +104,22 @@ public class ViewInventoryController implements Initializable {
         inventoryExport.setOnAction(e -> Reports.inventoryReport(inventoryObservableList));
         inventoryIDField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
-                inventoryIDField.setText(newValue.replaceAll("[^\\d]", ""));
+                inventoryIDField.setText(oldValue);
             }
         });
         inventoryAddID.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
-                inventoryAddID.setText(newValue.replaceAll("[^\\d]", ""));
+                inventoryAddID.setText(oldValue);
+            }
+        });
+        inventoryPriceField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("^\\d*\\.?\\d{0,2}$")) {
+                inventoryPriceField.setText(oldValue);
+            }
+        });
+        inventoryAddPrice.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("^\\d*\\.?\\d{0,2}$")) {
+                inventoryAddPrice.setText(oldValue);
             }
         });
     }

@@ -75,6 +75,11 @@ public class CheckInOutController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        checkInOutID.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                checkInOutID.setText(oldValue);
+            }
+        });
     }
 
 }
