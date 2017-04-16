@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +29,7 @@ public class Reports {
     }
 
     public static void patronReport(List<Patron> patrons) {
-        patronReport(patrons, "Patron.csv");
+        patronReport(patrons, "Patron Report at " + getTime() + ".csv");
     }
 
     public static void patronReport(List<Patron> patrons, String filename) {
@@ -46,7 +47,7 @@ public class Reports {
         for(Item i : items) {
             contents.append(i.toString());
         }
-        writeFile("Inventory.csv", contents.toString().replaceAll("null", ""));
+        writeFile("Inventory Report at " + getTime() + ".csv", contents.toString().replaceAll("null", ""));
     }
 
     public static void sessionReport(String startDate, String endDate) {
@@ -57,7 +58,7 @@ public class Reports {
             contents.append(i.toStringNoPatron());
             contents.append(PatronTableDAO.getByID(i.getPatronID()).toString());
         }
-        writeFile("Sessions.csv", contents.toString().replaceAll("null", ""));
+        writeFile("Sessions Report at " + getTime() + ".csv", contents.toString().replaceAll("null", ""));
 
         List<Integer> allPatrons = new ArrayList<>();
         for(Session i : allSessions) {
@@ -68,6 +69,52 @@ public class Reports {
         for(Integer i : distinctPatronIDs) {
             distinctPatrons.add(PatronTableDAO.getByID(i));
         }
-        patronReport(distinctPatrons, "Unique Patrons in Session Range.csv");
+        patronReport(distinctPatrons, "Unique Patrons in Session Range at " + getTime() + ".csv");
+    }
+
+    private static String getTime() {
+        LocalDateTime time = LocalDateTime.now();
+        String month;
+        String day;
+        String hour;
+        String minute;
+        String second;
+        String suffix;
+        if (time.getMonthValue() < 10) {
+            month = "0" + time.getMonthValue();
+        } else {
+            month = "" + time.getMonthValue();
+        }
+        if (time.getDayOfMonth() < 10) {
+            day = "0" + time.getDayOfMonth();
+        } else {
+            day = "" + time.getDayOfMonth();
+        }
+        if (time.getHour() < 10) {
+            hour = "0" + time.getHour();
+            suffix = "AM";
+        } else {
+            if (time.getHour() == 12) {
+                hour = "" + time.getHour();
+                suffix = "PM";
+            } else if (time.getHour() > 12) {
+                hour = "" + (time.getHour() - 12);
+                suffix = "PM";
+            } else {
+                hour = "" + time.getHour();
+                suffix = "AM";
+            }
+        }
+        if (time.getMinute() < 10) {
+            minute = "0" + time.getMinute();
+        } else {
+            minute = "" + time.getMinute();
+        }
+        if (time.getSecond() < 10) {
+            second = "0" + time.getSecond();
+        } else {
+            second = "" + time.getSecond();
+        }
+        return "" + time.getYear() + "-" + month + "-" + day + " " + hour + "." + minute + "." + second + " " + suffix;
     }
 }
