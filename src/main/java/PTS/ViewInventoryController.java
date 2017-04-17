@@ -39,6 +39,7 @@ public class ViewInventoryController implements Initializable {
     @FXML public TextField inventoryAddType;
     @FXML public TextField inventoryAddRetire;
     @FXML public TextField inventoryAddPrice;
+    @FXML public Text inventoryReportText;
 
     private RockWallManagementApp rockWallManagementApp;
 
@@ -46,7 +47,6 @@ public class ViewInventoryController implements Initializable {
         rockWallManagementApp = app;
         changeAccessView(rockWallManagementApp.getAccessLevel());
         viewInventoryExit.setOnAction(e -> rockWallManagementApp.showMainPage());
-        inventoryExport.setOnAction(e -> Reports.inventoryReport(inventoryObservableList));
         inventoryAddButton.setOnAction(e -> {
             Item item = new Item();
             if (!(inventoryAddID.getText().isEmpty() || inventoryAddType.getText().isEmpty() || inventoryAddRetire.getText().isEmpty() || inventoryAddPrice.getText().isEmpty())) {
@@ -82,26 +82,30 @@ public class ViewInventoryController implements Initializable {
                 viewInventoryTitle.setText("View Inventory");
                 inventoryAddItemVBox.setVisible(false);
                 deleteItem.setVisible(false);
-                inventoryExport.setVisible(false);
                 break;
             case MANAGER:
                 viewInventoryTitle.setText("View/Edit Inventory");
                 inventoryAddItemVBox.setVisible(true);
                 deleteItem.setVisible(true);
-                inventoryExport.setVisible(true);
                 break;
             case ADMINISTRATOR:
                 viewInventoryTitle.setText("View/Edit Inventory");
                 inventoryAddItemVBox.setVisible(true);
                 deleteItem.setVisible(true);
-                inventoryExport.setVisible(true);
                 break;
         }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        inventoryExport.setOnAction(e -> Reports.inventoryReport(inventoryObservableList));
+        inventoryReportText.setVisible(false);
+        inventoryExport.setOnAction(e -> {
+            inventoryReportText.setVisible(false);
+            if (!inventoryObservableList.isEmpty()) {
+                Reports.inventoryReport(inventoryObservableList);
+                inventoryReportText.setVisible(true);
+            }
+        });
         inventoryIDField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 inventoryIDField.setText(oldValue);

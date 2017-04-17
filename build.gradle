@@ -53,6 +53,23 @@ jar {
     }
 }
 
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': mainClassName
+        attributes 'Built-By': System.getProperty('user.name')
+        attributes 'Build-Jdk': System.getProperty('java.version')
+        attributes 'BUILD_NUMBER': System.env.BUILD_NUMBER ?: 'LOCAL'
+        attributes 'BUILD_URL': System.env.BUILD_URL ?: 'LOCAL'
+        attributes 'GIT_COMMIT': System.env.GIT_COMMIT ?: 'LOCAL'
+        attributes 'GIT_BRANCH': System.env.GIT_BRANCH ?: 'LOCAL'
+        attributes 'Implementation-Title': project.name
+        attributes 'Implementation-Version': project.version
+        attributes 'Implementation-Vendor-Id': project.group
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
 sourceSets {
     main {
         resources {

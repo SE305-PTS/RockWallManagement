@@ -4,8 +4,10 @@ import org.apache.commons.lang3.SystemUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,6 +15,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 public class DBInterface {
     private static final Logger log = LoggerFactory.getLogger(DBInterface.class);
@@ -26,12 +30,31 @@ public class DBInterface {
     public static void init() {
         try {
             url = "jdbc:sqlite:" + Paths.get(getDataPath().toString(), "rockwall.db").toString();
-            String sql = new String(Files.readAllBytes(Paths.get(DBInterface.class.getResource("/dbInit.sql").toURI())));
+
+            // gets data from dbInit.sql for fatjar, exclusive with below
+            JarFile jarFile = new JarFile("RockWallManagement.jar");
+            JarEntry entry = jarFile.getJarEntry("dbInit.sql");
+            InputStream input = jarFile.getInputStream(entry);
+            InputStreamReader isr = new InputStreamReader(input);
+            BufferedReader reader = new BufferedReader(isr);
+            String line;
+            StringBuilder sqlBuilder = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                sqlBuilder.append(line);
+            }
+            reader.close();
+
+            String sql = sqlBuilder.toString();
+
+            // gets data from dbInit.sql for running in IDE, exclusive with above
+//            String sql = new String(Files.readAllBytes(Paths.get(DBInterface.class.getResource("/dbInit.sql").toURI())));
+
+
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate(sql);
+            stmt.executeUpdate(sql.toString());
             stmt.closeOnCompletion();
-        } catch (URISyntaxException | IOException | SQLException e) {
+        } catch ( IOException | SQLException e) {
             log.error("Failed to initialize database file", e);
         }
     }

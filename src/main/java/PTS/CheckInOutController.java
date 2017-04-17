@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -14,6 +15,8 @@ public class CheckInOutController implements Initializable {
     @FXML public MenuItem checkInOutExit;
     @FXML public TextField checkInOutID;
     @FXML public Button checkInOutSubmit;
+    @FXML public Text checkInSuspendedText;
+    @FXML public Text checkInSuccessText;
 
     private RockWallManagementApp rockWallManagementApp;
 
@@ -23,6 +26,8 @@ public class CheckInOutController implements Initializable {
             rockWallManagementApp.showMainPage();
         });
         checkInOutSubmit.setOnAction(e -> {
+            checkInSuspendedText.setVisible(false);
+            checkInSuccessText.setVisible(false);
             if (!checkInOutID.getText().isEmpty()) {
                 Patron patron = PatronTableDAO.getByID(Integer.parseInt(checkInOutID.getText()));
                 if (patron.getID() == Integer.parseInt(checkInOutID.getText())) {
@@ -55,17 +60,28 @@ public class CheckInOutController implements Initializable {
 
                     Session session = SessionTableDAO.getLatestByMemberID(patron.getID());
 
+                    String successText = "Patron with ID " + patron.getID() + " has been checked ";
+
                     if (session.getCheckIn() == null) {
-                        session.setCheckIn(timeStamp);
-                        session.setPatronID(Integer.parseInt(checkInOutID.getText()));
-                        session.setSessionID(SessionTableDAO.getMaxID() + 1);
-                        SessionTableDAO.insert(session);
+                        if (patron.getSuspended().isEmpty()) {
+                            session.setCheckIn(timeStamp);
+                            session.setPatronID(Integer.parseInt(checkInOutID.getText()));
+                            session.setSessionID(SessionTableDAO.getMaxID() + 1);
+                            SessionTableDAO.insert(session);
+                            checkInSuccessText.setText(successText + "in");
+                            checkInSuccessText.setVisible(true);
+                            checkInOutID.setText("");
+                        } else {
+                            checkInOutID.setText("");
+                            checkInSuspendedText.setVisible(true);
+                        }
                     } else {
                         session.setCheckOut(timeStamp);
                         SessionTableDAO.update(session);
+                        checkInSuccessText.setText(successText + "out");
+                        checkInSuccessText.setVisible(true);
+                        checkInOutID.setText("");
                     }
-
-                    rockWallManagementApp.showMainPage();
                 }
             }
         });
@@ -75,6 +91,8 @@ public class CheckInOutController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        checkInSuspendedText.setVisible(false);
+        checkInSuccessText.setVisible(false);
         checkInOutID.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 checkInOutID.setText(oldValue);

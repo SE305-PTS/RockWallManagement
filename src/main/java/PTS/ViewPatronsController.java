@@ -53,6 +53,7 @@ public class ViewPatronsController implements Initializable {
     @FXML public CheckBox patronSubscriberNo;
     @FXML public Button deletePatron;
     @FXML public Button patronExport;
+    @FXML public Text patronReportText;
 
     private RockWallManagementApp rockWallManagementApp;
 
@@ -71,27 +72,31 @@ public class ViewPatronsController implements Initializable {
     private void changeAccessView(RockWallManagementApp.Role accessLevel) {
         switch (accessLevel) {
             case EMPLOYEE:
-                viewPatronsTitle.setText("View Patrons");
+                viewPatronsTitle.setText("View Patron Profiles");
                 deletePatron.setVisible(false);
-                patronExport.setVisible(false);
                 break;
             case MANAGER:
-                viewPatronsTitle.setText("View/Edit Patrons");
+                viewPatronsTitle.setText("View/Edit Patron Profiles");
                 deletePatron.setVisible(true);
-                patronExport.setVisible(true);
                 break;
             case ADMINISTRATOR:
-                viewPatronsTitle.setText("View/Edit Patrons");
+                viewPatronsTitle.setText("View/Edit Patron Profiles");
                 deletePatron.setVisible(true);
-                patronExport.setVisible(true);
                 break;
         }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        patronReportText.setVisible(false);
         viewPatronsExit.setOnAction(e -> rockWallManagementApp.showMainPage());
-        patronExport.setOnAction(e -> Reports.patronReport(patronObservableList));
+        patronExport.setOnAction(e -> {
+            patronReportText.setVisible(false);
+            if (!patronObservableList.isEmpty()) {
+                Reports.patronReport(patronObservableList);
+                patronReportText.setVisible(true);
+            }
+        });
         patronIDField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 patronIDField.setText(oldValue);

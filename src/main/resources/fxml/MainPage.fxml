@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
@@ -12,7 +8,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PTS.MainPageController">
    <children>
       <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -75,9 +70,9 @@
                         </HBox>
                         <HBox alignment="CENTER" spacing="12.0">
                            <children>
-                           <Button fx:id="mainSignWaiver" mnemonicParsing="false" text="Sign Waiver" />
+                           <Button fx:id="mainSignWaiver" mnemonicParsing="false" text="Create Patron Profile" />
                            <Button fx:id="mainCheckIn" mnemonicParsing="false" text="Check In/Out" />
-                           <Button fx:id="mainViewPatrons" mnemonicParsing="false" text="View Patron Account" />
+                           <Button fx:id="mainViewPatrons" mnemonicParsing="false" text="View Patron Profiles" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" spacing="12.0">
@@ -87,13 +82,13 @@
                                  <Cursor fx:constant="DEFAULT" />
                               </cursor>
                               </Button>
-                           <Button fx:id="mainGenerateReports" mnemonicParsing="false" text="Generate Report" />
+                           <Button fx:id="mainGenerateReports" mnemonicParsing="false" text="Generate Session Report" />
                            </children>
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                         </HBox>
-                     <Button fx:id="mainEditManagers" mnemonicParsing="false" text="Edit Manager Account" />
+                     <Button fx:id="mainEditManagers" mnemonicParsing="false" text="Edit Accounts" />
                      </children>
                      <padding>
                         <Insets bottom="12.0" left="20.0" right="20.0" />
