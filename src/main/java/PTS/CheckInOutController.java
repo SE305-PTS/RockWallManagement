@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -15,8 +16,7 @@ public class CheckInOutController implements Initializable {
     @FXML public MenuItem checkInOutExit;
     @FXML public TextField checkInOutID;
     @FXML public Button checkInOutSubmit;
-    @FXML public Text checkInSuspendedText;
-    @FXML public Text checkInSuccessText;
+    @FXML public Text checkInMessageText;
 
     private RockWallManagementApp rockWallManagementApp;
 
@@ -26,8 +26,7 @@ public class CheckInOutController implements Initializable {
             rockWallManagementApp.showMainPage();
         });
         checkInOutSubmit.setOnAction(e -> {
-            checkInSuspendedText.setVisible(false);
-            checkInSuccessText.setVisible(false);
+            checkInMessageText.setVisible(false);
             if (!checkInOutID.getText().isEmpty()) {
                 Patron patron = PatronTableDAO.getByID(Integer.parseInt(checkInOutID.getText()));
                 if (patron.getID() == Integer.parseInt(checkInOutID.getText())) {
@@ -68,21 +67,33 @@ public class CheckInOutController implements Initializable {
                             session.setPatronID(Integer.parseInt(checkInOutID.getText()));
                             session.setSessionID(SessionTableDAO.getMaxID() + 1);
                             SessionTableDAO.insert(session);
-                            checkInSuccessText.setText(successText + "in");
-                            checkInSuccessText.setVisible(true);
+                            checkInMessageText.setText(successText + "in");
+                            checkInMessageText.setVisible(true);
                             checkInOutID.setText("");
                         } else {
                             checkInOutID.setText("");
-                            checkInSuspendedText.setVisible(true);
+                            checkInMessageText.setText("Patron with ID " + patron.getID() + " is currently suspended");
+                            checkInMessageText.setFill(Color.RED);
+                            checkInMessageText.setVisible(true);
                         }
                     } else {
                         session.setCheckOut(timeStamp);
                         SessionTableDAO.update(session);
-                        checkInSuccessText.setText(successText + "out");
-                        checkInSuccessText.setVisible(true);
+                        checkInMessageText.setText(successText + "out");
+                        checkInMessageText.setFill(Color.BLACK);
+                        checkInMessageText.setVisible(true);
                         checkInOutID.setText("");
+
                     }
+                } else {
+                    checkInMessageText.setText("No patron with ID " + checkInOutID.getText());
+                    checkInMessageText.setFill(Color.RED);
+                    checkInMessageText.setVisible(true);
                 }
+            } else {
+                checkInMessageText.setText("ID Required");
+                checkInMessageText.setFill(Color.RED);
+                checkInMessageText.setVisible(true);
             }
         });
     }
@@ -91,8 +102,7 @@ public class CheckInOutController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        checkInSuspendedText.setVisible(false);
-        checkInSuccessText.setVisible(false);
+        checkInMessageText.setVisible(false);
         checkInOutID.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 checkInOutID.setText(oldValue);

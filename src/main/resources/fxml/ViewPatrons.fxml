@@ -80,12 +80,12 @@
                                     <Insets bottom="10.0" />
                                  </VBox.margin>
                               </Text>
-                              <CheckBox fx:id="patronMale" mnemonicParsing="false" text="Male">
+                              <CheckBox fx:id="patronMale" mnemonicParsing="false" text="M">
                                  <VBox.margin>
                                     <Insets bottom="10.0" />
                                  </VBox.margin>
                               </CheckBox>
-                              <CheckBox fx:id="patronFemale" layoutX="10.0" layoutY="36.0" mnemonicParsing="false" text="Female" />
+                              <CheckBox fx:id="patronFemale" layoutX="10.0" layoutY="36.0" mnemonicParsing="false" text="F" />
                            </children>
                         </VBox>
                         <VBox>
@@ -95,12 +95,12 @@
                                     <Insets bottom="10.0" />
                                  </VBox.margin>
                               </Text>
-                              <CheckBox fx:id="patronSubscriberYes" mnemonicParsing="false" text="Yes">
+                              <CheckBox fx:id="patronSubscriberYes" mnemonicParsing="false" text="true">
                                  <VBox.margin>
                                     <Insets bottom="10.0" />
                                  </VBox.margin>
                               </CheckBox>
-                              <CheckBox fx:id="patronSubscriberNo" layoutX="10.0" layoutY="36.0" mnemonicParsing="false" text="No" />
+                              <CheckBox fx:id="patronSubscriberNo" layoutX="10.0" layoutY="36.0" mnemonicParsing="false" text="false" />
                            </children>
                         </VBox>
                         <VBox layoutX="130.0" layoutY="20.0">
@@ -110,12 +110,12 @@
                                     <Insets bottom="10.0" />
                                  </VBox.margin>
                               </Text>
-                              <CheckBox fx:id="patronBelayYes" mnemonicParsing="false" text="Yes">
+                              <CheckBox fx:id="patronBelayYes" mnemonicParsing="false" text="true">
                                  <VBox.margin>
                                     <Insets bottom="10.0" />
                                  </VBox.margin>
                               </CheckBox>
-                              <CheckBox fx:id="patronBelayNo" layoutX="10.0" layoutY="36.0" mnemonicParsing="false" text="No" />
+                              <CheckBox fx:id="patronBelayNo" layoutX="10.0" layoutY="36.0" mnemonicParsing="false" text="false" />
                            </children>
                            <HBox.margin>
                               <Insets />
@@ -128,12 +128,12 @@
                                     <Insets bottom="10.0" />
                                  </VBox.margin>
                               </Text>
-                              <CheckBox fx:id="patronLeadYes" mnemonicParsing="false" text="Yes">
+                              <CheckBox fx:id="patronLeadYes" mnemonicParsing="false" text="true">
                                  <VBox.margin>
                                     <Insets bottom="10.0" />
                                  </VBox.margin>
                               </CheckBox>
-                              <CheckBox fx:id="patronLeadNo" layoutX="10.0" layoutY="36.0" mnemonicParsing="false" text="No" />
+                              <CheckBox fx:id="patronLeadNo" layoutX="10.0" layoutY="36.0" mnemonicParsing="false" text="false" />
                            </children>
                         </VBox>
                         <VBox layoutX="350.0" layoutY="20.0">

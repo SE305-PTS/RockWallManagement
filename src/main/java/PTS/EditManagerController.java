@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.Objects;
@@ -32,17 +33,20 @@ public class EditManagerController implements Initializable {
     @FXML public TableColumn<Account, String> managerLastNameColumn;
     @FXML public TableColumn<Account, String> managerUsernameColumn;
     @FXML public TableColumn<Account, String> managerTypeColumn;
+    @FXML public Text editManagerErrorText;
 
     private RockWallManagementApp rockWallManagementApp;
 
     public void setRockWallManagementApp(RockWallManagementApp app) {
         rockWallManagementApp = app;
+        editManagerErrorText.setVisible(false);
         initTableView();
         editManagerExit.setOnAction(e -> rockWallManagementApp.showMainPage());
         editManagerSubmit.setOnAction(e -> {
             Account account = new Account();
             if (!(editManagerFirstName.getText().isEmpty() || editManagerLastName.getText().isEmpty() || editManagerUsername.getText().isEmpty() || editManagerPassword.getText().isEmpty())) {
-                if (AccountTableDAO.getByUsername(editManagerUsername.getText()).getType() == null) {
+                Account temp = AccountTableDAO.getByUsername(editManagerUsername.getText());
+                if (temp.getType() == null) {
                     account.setFirstName(editManagerFirstName.getText());
                     account.setLastName(editManagerLastName.getText());
                     account.setPassword(editManagerPassword.getText());
@@ -60,7 +64,14 @@ public class EditManagerController implements Initializable {
                     editManagerUsername.setText("");
                     editManagerPassword.setText("");
                     editManagerTypeManager.setSelected(true);
+                    editManagerErrorText.setVisible(false);
+                } else {
+                    editManagerErrorText.setText("Account with username " + temp.getUsername() + " already exists!");
+                    editManagerErrorText.setVisible(true);
                 }
+            } else {
+                editManagerErrorText.setText("Missing required fields");
+                editManagerErrorText.setVisible(true);
             }
         });
         editManagerDelete.setOnAction(e -> {

@@ -2,8 +2,11 @@ package PTS;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.Objects;
@@ -14,6 +17,7 @@ public class LoginController implements Initializable {
     @FXML private MenuItem loginReturnMainPage;
     @FXML private TextField loginUsername;
     @FXML private PasswordField loginPassword;
+    @FXML private Text loginErrorText;
 
     private RockWallManagementApp rockWallManagementApp;
 
@@ -23,6 +27,7 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        loginErrorText.setVisible(false);
         loginSubmit.setOnAction(e -> {
             try {
                 if (!(loginUsername.getText().isEmpty() || loginPassword.getText().isEmpty())) {
@@ -34,11 +39,13 @@ public class LoginController implements Initializable {
                             } else if (Objects.equals(account.getType(), "M")) {
                                 rockWallManagementApp.setAccessLevel(RockWallManagementApp.Role.MANAGER);
                             }
+
+                            rockWallManagementApp.showMainPage();
                         }
                     }
                 }
 
-                rockWallManagementApp.showMainPage();
+                loginErrorText.setVisible(true);
             } catch (Exception ex) {
                 System.out.println("Submit button pressed: " + ex);
                 ex.printStackTrace();

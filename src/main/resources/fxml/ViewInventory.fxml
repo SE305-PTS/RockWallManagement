@@ -100,7 +100,7 @@
                     <columns>
                       <TableColumn fx:id="inventoryIDColumn" prefWidth="178.0" text="ID" />
                       <TableColumn fx:id="inventoryTypeColumn" minWidth="0.0" prefWidth="214.0" text="Type" />
-                        <TableColumn fx:id="inventoryRetireColumn" prefWidth="180.0" text="Retire Date" />
+                        <TableColumn fx:id="inventoryRetireColumn" prefWidth="180.0" text="Retire Date (yyyy-mm-dd)" />
                         <TableColumn fx:id="inventoryPriceColumn" prefWidth="200.0" text="Purchase Price" />
                     </columns>
                   </TableView>
@@ -122,11 +122,16 @@
                            <children>
                               <VBox>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID">
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </Text>
+                                    <HBox>
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Text>
+                                          <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                       </children>
+                                    </HBox>
                                     <TextField fx:id="inventoryAddID" />
                                  </children>
                                  <HBox.margin>
@@ -135,11 +140,16 @@
                               </VBox>
                               <VBox layoutX="20.0" layoutY="20.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </Text>
+                                    <HBox>
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Text>
+                                          <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                       </children>
+                                    </HBox>
                                     <TextField fx:id="inventoryAddType" />
                                  </children>
                                  <HBox.margin>
@@ -148,11 +158,16 @@
                               </VBox>
                               <VBox layoutX="130.0" layoutY="20.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Retire Date">
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </Text>
+                                    <HBox>
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Retire Date">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Text>
+                                          <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                       </children>
+                                    </HBox>
                                     <TextField fx:id="inventoryAddRetire" promptText="yyyy-mm-dd" />
                                  </children>
                                  <HBox.margin>
@@ -161,17 +176,33 @@
                               </VBox>
                               <VBox layoutX="240.0" layoutY="20.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Purchase Price">
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </Text>
+                                    <HBox>
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Purchase Price">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Text>
+                                          <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                       </children>
+                                    </HBox>
                                     <TextField fx:id="inventoryAddPrice" />
                                  </children>
                               </VBox>
                            </children>
                         </HBox>
-                        <Button fx:id="inventoryAddButton" mnemonicParsing="false" text="Add Item" />
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="denotes required fields" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="12.0">
+                           <children>
+                              <Button fx:id="inventoryAddButton" mnemonicParsing="false" text="Add Item" />
+                              <Text fx:id="inventoryErrorText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Missing required fields" />
+                           </children>
+                        </HBox>
                      </children>
                      <padding>
                         <Insets top="12.0" />

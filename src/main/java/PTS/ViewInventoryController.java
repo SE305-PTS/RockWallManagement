@@ -40,17 +40,20 @@ public class ViewInventoryController implements Initializable {
     @FXML public TextField inventoryAddRetire;
     @FXML public TextField inventoryAddPrice;
     @FXML public Text inventoryReportText;
+    @FXML public Text inventoryErrorText;
 
     private RockWallManagementApp rockWallManagementApp;
 
     public void setRockWallManagementApp(RockWallManagementApp app) {
         rockWallManagementApp = app;
+        inventoryErrorText.setVisible(false);
         changeAccessView(rockWallManagementApp.getAccessLevel());
         viewInventoryExit.setOnAction(e -> rockWallManagementApp.showMainPage());
         inventoryAddButton.setOnAction(e -> {
             Item item = new Item();
             if (!(inventoryAddID.getText().isEmpty() || inventoryAddType.getText().isEmpty() || inventoryAddRetire.getText().isEmpty() || inventoryAddPrice.getText().isEmpty())) {
-                if (InventoryTableDAO.getByID(Integer.parseInt(inventoryAddID.getText())).getType() == null) {
+                Item temp = InventoryTableDAO.getByID(Integer.parseInt(inventoryAddID.getText()));
+                if (temp.getType() == null) {
                     if (inventoryAddRetire.getText().matches("\\d{4}[-]{1}\\d{2}[-]{1}\\d{2}")) {
                         item.setID(Integer.valueOf(inventoryAddID.getText()));
                         item.setType(inventoryAddType.getText());
@@ -63,8 +66,15 @@ public class ViewInventoryController implements Initializable {
                         inventoryAddPrice.setText("");
                         inventoryAddRetire.setText("");
                         inventoryAddType.setText("");
+                        inventoryErrorText.setVisible(false);
                     }
+                } else {
+                    inventoryErrorText.setText("Item with ID " + temp.getID() + " already exists!");
+                    inventoryErrorText.setVisible(true);
                 }
+            } else {
+                inventoryErrorText.setText("Missing required fields");
+                inventoryErrorText.setVisible(true);
             }
         });
         deleteItem.setOnAction(e -> {

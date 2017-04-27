@@ -10,13 +10,14 @@
          <center>
             <SplitPane dividerPositions="0.5" BorderPane.alignment="CENTER">
               <items>
-                  <VBox alignment="CENTER" layoutX="20.0" layoutY="65.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox alignment="CENTER" layoutX="20.0" layoutY="65.0" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Account" wrappingWidth="183.21875">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Account">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Text>
+                        <Text fx:id="editManagerErrorText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Missing fields" />
                         <GridPane hgap="12.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="271.0" vgap="20.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="102.0" />
@@ -32,21 +33,25 @@
                               <HBox alignment="CENTER_RIGHT">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
+                                    <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="1">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" GridPane.rowIndex="1" />
+                                    <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="2">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username" GridPane.rowIndex="3" />
+                                    <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="3">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" GridPane.rowIndex="4" />
+                                    <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
                                  </children>
                               </HBox>
                               <TextField fx:id="editManagerFirstName" GridPane.columnIndex="1" />
@@ -66,6 +71,12 @@
                                  </toggleGroup>
                               </RadioButton>
                               <RadioButton fx:id="editManagerTypeAdministrator" mnemonicParsing="false" text="Administrator" toggleGroup="$editManagerType" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="denotes required fields" />
                            </children>
                         </HBox>
                         <Button fx:id="editManagerSubmit" layoutX="91.0" layoutY="318.0" mnemonicParsing="false" text="Add Account" />
