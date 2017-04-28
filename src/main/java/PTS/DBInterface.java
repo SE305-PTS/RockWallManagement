@@ -3,6 +3,7 @@ package PTS;
 import org.apache.commons.lang3.SystemUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sqlite.SQLiteConfig;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -54,7 +55,7 @@ public class DBInterface {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(sql.toString());
             stmt.closeOnCompletion();
-        } catch ( IOException | SQLException e) {
+        } catch ( IOException | SQLException /*| URISyntaxException*/ e) {
             log.error("Failed to initialize database file", e);
         }
     }
@@ -77,5 +78,13 @@ public class DBInterface {
 
     public static Path getExportPath(String filename) throws IOException {
         return Paths.get(System.getProperty("user.home"), "Desktop", filename);
+    }
+
+    public static Connection getConnection() throws SQLException {
+        SQLiteConfig config = new SQLiteConfig();
+        config.enforceForeignKeys(true);
+        Connection conn =  DriverManager.getConnection(url, config.toProperties());
+        conn.setAutoCommit(true);
+        return conn;
     }
 }

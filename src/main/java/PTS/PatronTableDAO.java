@@ -5,8 +5,10 @@ import javafx.collections.ObservableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.transform.Result;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class PatronTableDAO {
     public static void insert(Patron pat) {
         String query = "INSERT INTO Patron(id,firstname,lastname,gender,email,subscriber,belaycert,leadcert,suspension) VALUES (?,?,?,?,?,?,?,?,?)";
         try {
-            Connection conn = DriverManager.getConnection(DBInterface.getUrl());
+            Connection conn = DBInterface.getConnection();
             conn.setAutoCommit(true);
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, pat.getID());
@@ -44,8 +46,7 @@ public class PatronTableDAO {
     public static void delete(int id) {
         String query = "DELETE FROM Patron WHERE id = ?";
         try {
-            Connection conn = DriverManager.getConnection(DBInterface.getUrl());
-            conn.setAutoCommit(true);
+            Connection conn = DBInterface.getConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -65,7 +66,7 @@ public class PatronTableDAO {
         String query = "UPDATE Patron Set firstname = ?, lastname = ?, gender = ?, email = ?, subscriber = ?, belaycert = ?, leadcert = ?, suspension = ?";
         query = query + " WHERE id = ?";
         try {
-            Connection conn = DriverManager.getConnection(DBInterface.getUrl());
+            Connection conn = DBInterface.getConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, pat.getFirstName());
             stmt.setString(2, pat.getLastName());
@@ -94,7 +95,7 @@ public class PatronTableDAO {
         List<Patron> list = new ArrayList<>();
         ObservableList<Patron> observable;
         try {
-            Connection conn = DriverManager.getConnection(DBInterface.getUrl());
+            Connection conn = DBInterface.getConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
@@ -134,7 +135,7 @@ public class PatronTableDAO {
         List<Patron> list = new ArrayList<>();
         ObservableList<Patron> observable;
         try {
-            Connection conn = DriverManager.getConnection(DBInterface.getUrl());
+            Connection conn = DBInterface.getConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
@@ -164,7 +165,7 @@ public class PatronTableDAO {
         query = query + " WHERE id = ?";
         Patron current = new Patron();
         try {
-            Connection conn = DriverManager.getConnection(DBInterface.getUrl());
+            Connection conn = DBInterface.getConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();

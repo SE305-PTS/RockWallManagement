@@ -5,7 +5,10 @@ import javafx.collections.ObservableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +18,7 @@ public class SessionTableDAO {
     public static void insert(Session item) {
         String query = "INSERT INTO Session(id,memberid,checkin,checkout) VALUES (?,?,?,?)";
         try {
-            Connection conn = DriverManager.getConnection(DBInterface.getUrl());
+            Connection conn = DBInterface.getConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, item.getSessionID());
             stmt.setInt(2, item.getPatronID());
@@ -37,7 +40,7 @@ public class SessionTableDAO {
     public static void delete(int id) {
         String query = "DELETE FROM Session WHERE id = ?";
         try {
-            Connection conn = DriverManager.getConnection(DBInterface.getUrl());
+            Connection conn = DBInterface.getConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -57,7 +60,7 @@ public class SessionTableDAO {
         String query = "UPDATE Session Set memberid = ?, checkin = ?, checkout = ?";
         query = query + " WHERE id = ?";
         try {
-            Connection conn = DriverManager.getConnection(DBInterface.getUrl());
+            Connection conn = DBInterface.getConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, item.getPatronID());
             stmt.setString(2, item.getCheckIn());
@@ -81,7 +84,7 @@ public class SessionTableDAO {
         List<Session> list = new ArrayList<>();
         ObservableList<Session> observable;
         try {
-            Connection conn = DriverManager.getConnection(DBInterface.getUrl());
+            Connection conn = DBInterface.getConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
@@ -111,7 +114,7 @@ public class SessionTableDAO {
         List<Session> list = new ArrayList<>();
         ObservableList<Session> observable;
         try {
-            Connection conn = DriverManager.getConnection(DBInterface.getUrl());
+            Connection conn = DBInterface.getConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
@@ -135,7 +138,7 @@ public class SessionTableDAO {
         String query = "SELECT id,memberid,checkin,checkout FROM Session WHERE memberid = ? and checkout IS NULL";
         Session current = new Session();
         try {
-            Connection conn = DriverManager.getConnection(DBInterface.getUrl());
+            Connection conn = DBInterface.getConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -157,7 +160,7 @@ public class SessionTableDAO {
         String query = "SELECT MAX(id) AS maxid FROM SESSION";
         int max = 0;
         try {
-            Connection conn = DriverManager.getConnection(DBInterface.getUrl());
+            Connection conn = DBInterface.getConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
@@ -176,7 +179,7 @@ public class SessionTableDAO {
         query = query + " WHERE checkin >= ? and checkin <= ? and checkout >= ? and checkout <= ?";
         ArrayList<Session> list = new ArrayList<>();
         try {
-            Connection conn = DriverManager.getConnection(DBInterface.getUrl());
+            Connection conn = DBInterface.getConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, checkin);
             stmt.setString(2, checkout);
